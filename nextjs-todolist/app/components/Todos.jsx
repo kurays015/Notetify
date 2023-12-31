@@ -1,23 +1,15 @@
 "use client";
-import { useState } from "react";
 import useGetTodos from "../hooks/useGetTodos";
 import TodoItem from "./TodoItem";
+import useCrudContext from "../hooks/useCrudContext";
 
 export default function Todos() {
   const { data: todos, isLoading, isError, error } = useGetTodos();
-  const [inProgress, setInProgress] = useState([]);
-  const [completed, setCompleted] = useState([]);
+  const { inProgress, completed } = useCrudContext();
 
   if (isLoading) return <h1 className="">Todos Loading...</h1>;
   if (isError)
     return <h1 className="">{error.message}, You must be logged in...</h1>;
-
-  function handleInProgress(todo, id) {
-    setInProgress([...inProgress, { todo, id }]);
-  }
-  function handleCompleted(todo, id) {
-    setCompleted([...completed, { todo, id }]);
-  }
 
   return (
     <div className="flex flex-col md:flex-row items-start justify-center gap-6 md:gap-10 text-white text-2xl mt-5">
@@ -27,14 +19,7 @@ export default function Todos() {
         </h1>
         <div className="p-4">
           {todos?.length ? (
-            todos?.map(todo => (
-              <TodoItem
-                {...todo}
-                key={todo._id}
-                handleInProgress={handleInProgress}
-                handleCompleted={handleCompleted}
-              />
-            ))
+            todos?.map(todo => <TodoItem {...todo} key={todo._id} />)
           ) : (
             <p className="text-center italic">no todos...</p>
           )}
@@ -46,9 +31,7 @@ export default function Todos() {
         </h1>
         <div className="p-4">
           {inProgress.map(todo => (
-            <div key={todo.id}>
-              <h1>{todo.todo}</h1>
-            </div>
+            <TodoItem {...todo} key={todo._id} />
           ))}
         </div>
       </div>
@@ -58,16 +41,10 @@ export default function Todos() {
         </h1>
         <div className="p-4">
           {completed.map(todo => (
-            <div key={todo.id}>
-              <h1>{todo.todo}</h1>
-            </div>
+            <TodoItem {...todo} key={todo._id} />
           ))}
         </div>
       </div>
     </div>
   );
 }
-
-//  {todos?.map(todo => (
-//       <TodoItem {...todo} key={todo.id} />
-//     ))}

@@ -60,7 +60,7 @@ export default function ChakraModal() {
     }
   }, []);
 
-  console.log("user is valid", accessToken);
+  // console.log("user is valid", accessToken);
 
   return (
     <>
