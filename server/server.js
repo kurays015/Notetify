@@ -11,13 +11,8 @@ const PORT = 3001 || process.env.PORT;
 const todoRoute = require("./routes/todo");
 const userRoute = require("./routes/user");
 const requireAuth = require("./middlewares/auth");
-
+const corsOptions = require("./config/corsOption");
 const app = express();
-
-const corsOptions = {
-  origin: "http://localhost:3000", // Replace with your frontend URL
-  credentials: true, // Allow credentials (cookies)
-};
 
 //middlewares
 app.use(cors(corsOptions));
