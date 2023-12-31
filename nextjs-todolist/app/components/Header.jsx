@@ -7,7 +7,7 @@ export default function Header() {
   return (
     <div
       className={` ${
-        theme ? "bg-[#1c1c1c]" : "fff"
+        theme ? "bg-[#1c1c1c]" : "fff border-gray-300 border"
       } rounded-lg shadow-xl p-5 max-w-3xl mx-auto flex flex-col items-center justify-center gap-8 themeTransitionColor`}
     >
       <h1

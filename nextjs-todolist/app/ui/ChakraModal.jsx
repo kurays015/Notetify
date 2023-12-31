@@ -55,7 +55,9 @@ export default function ChakraModal() {
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
-    setAccessToken(token);
+    if (token) {
+      setAccessToken(token);
+    }
   }, []);
 
   console.log("user is valid", accessToken);
