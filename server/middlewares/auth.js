@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-async function requireAuth(req, res, next) {
+module.exports = async function requireAuth(req, res, next) {
   const token = req.cookies.accessToken;
 
   try {
@@ -17,6 +17,4 @@ async function requireAuth(req, res, next) {
   } catch (err) {
     res.status(401).json(err.message);
   }
-}
-
-module.exports = requireAuth;
+};
