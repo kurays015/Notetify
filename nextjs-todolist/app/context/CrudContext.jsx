@@ -31,7 +31,7 @@ export default function CrudContextProvider({ children }) {
   }
 
   function handleCurrentTodos(todo, _id) {
-    if (!todosData.some(todo => todo._id !== _id)) {
+    if (!todosData.some(todo => todo._id === _id)) {
       setTodosData([...todosData, { todo, _id }]);
     }
     const updatedInProgress = inProgress.filter(todo => todo._id !== _id);
@@ -39,6 +39,7 @@ export default function CrudContextProvider({ children }) {
     const updatedCompleted = completed.filter(item => item._id !== _id);
     setCompleted(updatedCompleted);
   }
+  console.log(todosData);
 
   const value = {
     inProgress,
