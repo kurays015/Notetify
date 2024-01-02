@@ -2,7 +2,7 @@
 import useGetTodos from "../hooks/useGetTodos";
 import TodoItem from "./TodoItem";
 import useCrudContext from "../hooks/useCrudContext";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export default function Todos() {
   const { data: todos, isLoading, isError, error } = useGetTodos();

@@ -50,7 +50,7 @@ export default function ChakraModal() {
           <ModalContent mx="3">
             <ModalHeader textAlign="center">Welcome back!</ModalHeader>
             <ModalCloseButton />
-            <ModalBody pb={6}>
+            <ModalBody>
               <FormControl position="relative">
                 <FormLabel>Email</FormLabel>
                 <Input ref={initialRef} placeholder="email" />
@@ -76,17 +76,19 @@ export default function ChakraModal() {
                   </InputRightElement>
                 </InputGroup>
               </FormControl>
-              <div className="mt-3 flex items-center gap-3">
+              <div className="mt-3 flex flex-col items-center gap-3">
                 <p className="text-[.8rem] md:text-base">
                   Don't have an account yet?
+                  <span
+                    className="text-slate-500 cursor-pointer text-[.8rem] md:text-base ml-2"
+                    onClick={handleReset}
+                  >
+                    Register
+                  </span>
                 </p>
-                <span
-                  className="text-slate-500 cursor-pointer text-[.8rem] md:text-base"
-                  onClick={handleReset}
-                >
-                  Register
-                </span>
-                <span>{error}</span>
+                <div className="text-red-500 text-sm font-semibold">
+                  {error}
+                </div>
               </div>
             </ModalBody>
 
@@ -109,7 +111,7 @@ export default function ChakraModal() {
           <ModalContent mx="3">
             <ModalHeader textAlign="center">Create your account</ModalHeader>
             <ModalCloseButton />
-            <ModalBody pb={6}>
+            <ModalBody>
               <FormControl>
                 <FormLabel>Email</FormLabel>
                 <Input ref={initialRef} placeholder="enter your email" />
@@ -135,14 +137,20 @@ export default function ChakraModal() {
                   </InputRightElement>
                 </InputGroup>
               </FormControl>
-              <div className="mt-3 flex items-center gap-3 text-[.8rem] md:text-base">
-                Already have an account yet?
-                <span
-                  className="text-slate-500 cursor-pointer text-[.8rem] md:text-base"
-                  onClick={handleReset}
-                >
-                  Login
-                </span>
+              <div className="mt-3 flex flex-col items-center gap-3 text-[.8rem] md:text-base">
+                <p>
+                  Already have an account yet?
+                  <span
+                    className="text-slate-500 cursor-pointer text-[.8rem] md:text-base ml-2"
+                    onClick={handleReset}
+                  >
+                    Login
+                  </span>
+                </p>
+
+                <div className="text-red-500 text-sm font-semibold">
+                  {error}
+                </div>
               </div>
             </ModalBody>
 
