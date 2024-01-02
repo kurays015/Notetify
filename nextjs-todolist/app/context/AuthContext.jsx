@@ -1,6 +1,5 @@
 "use client";
 import { createContext, useEffect, useRef, useState } from "react";
-import axios from "../api/axios";
 import { useDisclosure } from "@chakra-ui/react";
 import useLogin from "../hooks/useLogin";
 import useRegister from "../hooks/useRegister";
@@ -13,6 +12,7 @@ export default function AuthContextProvider({ children }) {
   const [isActive, setIsActive] = useState(true);
   const passwordRef = useRef(null);
   const initialRef = useRef(null);
+  const finalRef = useRef(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const {
@@ -72,6 +72,7 @@ export default function AuthContextProvider({ children }) {
     handleReset,
     initialRef,
     passwordRef,
+    finalRef,
     isOpen,
     onClose,
     handleLogin,

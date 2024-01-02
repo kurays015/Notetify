@@ -19,13 +19,12 @@ import { useRef } from "react";
 import useAuthContext from "../hooks/useAuthContext";
 
 export default function ChakraModal() {
-  const finalRef = useRef(null);
-
   const {
     homeLogin,
     showPassword,
     setShowPassword,
     isActive,
+    finalRef,
     passwordRef,
     handleReset,
     initialRef,
