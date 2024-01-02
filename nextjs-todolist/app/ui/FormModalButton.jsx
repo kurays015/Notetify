@@ -26,17 +26,23 @@ export default function FormModalButton() {
   const onClose = () => setIsOpen(false);
   const onOpen = () => setIsOpen(true);
 
-  const { mutateAsync, isPending, isSuccess, isError } = useAddTodos();
+  const {
+    mutateAsync: submitTodo,
+    isPending,
+    isSuccess,
+    isError,
+  } = useAddTodos();
 
   async function handleSave() {
     if (todoRef.current.value === "" || descriptionRef.current.value === "") {
       setError("All fields are required");
       return;
     }
-    await mutateAsync({
+    await submitTodo({
       todo: todoRef.current.value,
       description: descriptionRef.current.value,
     });
+    setIsOpen(false);
   }
 
   return (
@@ -103,7 +109,13 @@ export default function FormModalButton() {
             <Button variant="ghost" onClick={onClose}>
               Cancel
             </Button>
-            <Button colorScheme="blue" onClick={handleSave}>
+            <Button
+              isLoading={isPending}
+              loadingText="Adding"
+              colorScheme="blue"
+              onClick={handleSave}
+              disabled={isPending}
+            >
               Save
             </Button>
           </ModalFooter>
