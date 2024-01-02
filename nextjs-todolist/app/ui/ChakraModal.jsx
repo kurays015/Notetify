@@ -6,7 +6,6 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  useDisclosure,
   Button,
   FormControl,
   FormLabel,
@@ -20,19 +19,29 @@ import { useRef } from "react";
 import useAuthContext from "../hooks/useAuthContext";
 
 export default function ChakraModal() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const finalRef = useRef(null);
 
   const {
-    handleLogin,
     showPassword,
     setShowPassword,
     isActive,
     passwordRef,
     handleReset,
     initialRef,
+    isOpen,
+    onOpen,
+    onClose,
+    login,
+    isPending,
     error,
   } = useAuthContext();
+
+  async function handleLogin() {
+    await login({
+      email: initialRef.current.value,
+      password: passwordRef.current.value,
+    });
+  }
 
   return (
     <>
@@ -86,14 +95,21 @@ export default function ChakraModal() {
                     Register
                   </span>
                 </p>
-                <div className="text-red-500 text-sm font-semibold">
-                  {error}
-                </div>
+                {/* <div className="text-red-500 text-sm font-semibold">
+                  {error?.message}
+                </div> */}
               </div>
             </ModalBody>
 
             <ModalFooter>
-              <Button colorScheme="blue" mr={3} onClick={handleLogin}>
+              <Button
+                isLoading={isPending}
+                loadingText="Logging in..."
+                colorScheme="blue"
+                disabled={isPending}
+                mr={3}
+                onClick={handleLogin}
+              >
                 Login
               </Button>
               <Button onClick={onClose}>Cancel</Button>

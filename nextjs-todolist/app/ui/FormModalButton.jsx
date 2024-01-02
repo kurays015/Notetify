@@ -71,6 +71,7 @@ export default function FormModalButton() {
                 Todo:
               </FormLabel>
               <Input
+                disabled={isPending}
                 ref={todoRef}
                 type="text"
                 name="todo"
@@ -91,6 +92,7 @@ export default function FormModalButton() {
                 Description:
               </FormLabel>
               <Textarea
+                disabled={isPending}
                 ref={descriptionRef}
                 id="description"
                 placeholder="Enter description"
