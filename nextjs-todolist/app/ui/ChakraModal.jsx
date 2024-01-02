@@ -15,7 +15,6 @@ import {
   InputGroup,
 } from "@chakra-ui/react";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
-import { useRef } from "react";
 import useAuthContext from "../hooks/useAuthContext";
 
 export default function ChakraModal() {
@@ -87,7 +86,7 @@ export default function ChakraModal() {
               </FormControl>
               <div className="mt-3 flex flex-col items-center gap-3">
                 <p className="text-[.8rem] md:text-base">
-                  Don't have an account yet?
+                  Don&apos;t have an account yet?
                   <span
                     className="text-slate-500 cursor-pointer text-[.8rem] md:text-base ml-2"
                     onClick={handleReset}
