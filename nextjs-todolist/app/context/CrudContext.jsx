@@ -4,26 +4,12 @@ import { createContext, useReducer, useState } from "react";
 
 export const CrudContext = createContext();
 
-// function reducer(state, action) {
-//   switch (action.type) {
-//     case "CURRENT_TODOS":
-//       return action.payload
-//     case "IN_PROGRESS":
-//       return;
-//     case "COMPLETED":
-//       return;
-//     default:
-//       return state;
-//   }
-// }
-
 export default function CrudContextProvider({ children }) {
   const [inProgress, setInProgress] = useState([]);
   const [completed, setCompleted] = useState([]);
   const [todosData, setTodosData] = useState([]);
-  // const [status, dispatch] = useReducer(reducer, "");
 
-  //need to refactor below
+  //need to refactor code below
   function handleInProgress(todo, _id) {
     if (!inProgress.some(todo => todo._id === _id)) {
       setInProgress([...inProgress, { todo, _id }]);

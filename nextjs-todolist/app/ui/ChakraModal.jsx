@@ -16,51 +16,23 @@ import {
   InputGroup,
 } from "@chakra-ui/react";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
-import { useEffect, useRef, useState } from "react";
-import axios from "../api/axios";
+import { useRef } from "react";
 import useAuthContext from "../hooks/useAuthContext";
 
 export default function ChakraModal() {
-  const [showPassword, setShowPassword] = useState(false);
-  const [isActive, setIsActive] = useState(true);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [error, setError] = useState("");
-  const passwordRef = useRef(null);
-  const initialRef = useRef(null);
   const finalRef = useRef(null);
-  const { accessToken, setAccessToken } = useAuthContext();
 
-  const handleReset = () => {
-    setIsActive(prev => !prev);
-    setShowPassword(false);
-    passwordRef.current.value = "";
-    initialRef.current.value = "";
-  };
-
-  const handleLogin = async () => {
-    try {
-      const { data: accessToken } = await axios.post("/auth/login", {
-        email: initialRef.current.value,
-        password: passwordRef.current.value,
-      });
-      if (accessToken) {
-        console.log(accessToken);
-        localStorage.setItem("accessToken", accessToken);
-      }
-    } catch (err) {
-      setError(err?.response.data);
-      console.log(err.response.data);
-    }
-  };
-
-  useEffect(() => {
-    const token = localStorage.getItem("accessToken");
-    if (token) {
-      setAccessToken(token);
-    }
-  }, []);
-
-  // console.log("user is valid", accessToken);
+  const {
+    handleLogin,
+    showPassword,
+    setShowPassword,
+    isActive,
+    passwordRef,
+    handleReset,
+    initialRef,
+    error,
+  } = useAuthContext();
 
   return (
     <>
