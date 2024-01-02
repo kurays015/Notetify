@@ -2,10 +2,17 @@
 import useGetTodos from "../hooks/useGetTodos";
 import TodoItem from "./TodoItem";
 import useCrudContext from "../hooks/useCrudContext";
+import { useEffect, useState } from "react";
 
 export default function Todos() {
   const { data: todos, isLoading, isError, error } = useGetTodos();
-  const { inProgress, completed } = useCrudContext();
+  const { inProgress, completed, todosData, setTodosData } = useCrudContext();
+
+  useEffect(() => {
+    if (todos) {
+      setTodosData([...todos]);
+    }
+  }, [todos]);
 
   if (isLoading) return <h1 className="">Todos Loading...</h1>;
   if (isError)
@@ -18,8 +25,8 @@ export default function Todos() {
           Current Todos
         </h1>
         <div className="p-4">
-          {todos?.length ? (
-            todos?.map(todo => <TodoItem {...todo} key={todo._id} />)
+          {todosData?.length ? (
+            todosData?.map(todo => <TodoItem {...todo} key={todo._id} />)
           ) : (
             <p className="text-center italic">no todos...</p>
           )}
