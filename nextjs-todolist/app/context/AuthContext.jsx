@@ -23,8 +23,8 @@ export default function AuthContextProvider({ children }) {
         localStorage.setItem("accessToken", accessToken);
       }
     } catch (err) {
-      setError(err?.response.data);
-      console.log(err.response.data);
+      // setError(err?.response.data);
+      console.log(err);
     }
   };
 
@@ -51,6 +51,7 @@ export default function AuthContextProvider({ children }) {
     isActive,
     setIsActive,
     error,
+    setError,
     handleReset,
     initialRef,
     passwordRef,

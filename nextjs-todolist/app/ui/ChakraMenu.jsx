@@ -14,6 +14,7 @@ import useCrudContext from "../hooks/useCrudContext";
 export default function ChakraMenu({ todo, _id }) {
   const { handleInProgress, handleCompleted, handleCurrentTodos } =
     useCrudContext();
+
   return (
     <Menu direction="ltr" isLazy={true}>
       <MenuButton as={IconButton} bg="gray" icon={<HiDotsVertical />} />

@@ -16,15 +16,28 @@ import {
 } from "@chakra-ui/react";
 import { FaPlus } from "react-icons/fa";
 import useAddTodos from "../hooks/useAddTodos";
+import useAuthContext from "../hooks/useAuthContext";
 
 export default function FormModalButton() {
+  const [error, setError] = useState();
   const [isOpen, setIsOpen] = useState(false);
-  const onClose = () => setIsOpen(false);
-  const onOpen = () => setIsOpen(true);
   const todoRef = useRef();
   const descriptionRef = useRef();
+  const onClose = () => setIsOpen(false);
+  const onOpen = () => setIsOpen(true);
 
   const { mutateAsync, isPending, isSuccess, isError } = useAddTodos();
+
+  async function handleSave() {
+    if (todoRef.current.value === "" || descriptionRef.current.value === "") {
+      setError("All fields are required");
+      return;
+    }
+    await mutateAsync({
+      todo: todoRef.current.value,
+      description: descriptionRef.current.value,
+    });
+  }
 
   return (
     <>
@@ -84,20 +97,13 @@ export default function FormModalButton() {
                 _focus={{ outline: "none" }}
               />
             </FormControl>
+            <div className="text-center text-red-500">{error}</div>
           </ModalBody>
           <ModalFooter display="flex" gap="3">
             <Button variant="ghost" onClick={onClose}>
               Cancel
             </Button>
-            <Button
-              colorScheme="blue"
-              onClick={async () => {
-                await mutateAsync({
-                  todo: todoRef.current.value,
-                  description: descriptionRef.current.value,
-                });
-              }}
-            >
+            <Button colorScheme="blue" onClick={handleSave}>
               Save
             </Button>
           </ModalFooter>

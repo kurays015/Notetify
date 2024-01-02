@@ -39,7 +39,6 @@ export default function CrudContextProvider({ children }) {
     const updatedCompleted = completed.filter(item => item._id !== _id);
     setCompleted(updatedCompleted);
   }
-  console.log(todosData);
 
   const value = {
     inProgress,
