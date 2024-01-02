@@ -41,6 +41,7 @@ export default function ChakraModal() {
       email: initialRef.current.value,
       password: passwordRef.current.value,
     });
+    onClose();
   }
 
   return (
