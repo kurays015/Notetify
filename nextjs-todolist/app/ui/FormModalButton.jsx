@@ -16,7 +16,6 @@ import {
 } from "@chakra-ui/react";
 import { FaPlus } from "react-icons/fa";
 import useAddTodos from "../hooks/useAddTodos";
-import useAuthContext from "../hooks/useAuthContext";
 
 export default function FormModalButton() {
   const [error, setError] = useState();
@@ -26,12 +25,7 @@ export default function FormModalButton() {
   const onClose = () => setIsOpen(false);
   const onOpen = () => setIsOpen(true);
 
-  const {
-    mutateAsync: submitTodo,
-    isPending,
-    isSuccess,
-    isError,
-  } = useAddTodos();
+  const { mutateAsync: submitTodo, isPending: addTodoLoading } = useAddTodos();
 
   async function handleSave() {
     if (todoRef.current.value === "" || descriptionRef.current.value === "") {
@@ -71,7 +65,7 @@ export default function FormModalButton() {
                 Todo:
               </FormLabel>
               <Input
-                disabled={isPending}
+                disabled={addTodoLoading}
                 ref={todoRef}
                 type="text"
                 name="todo"
@@ -92,7 +86,7 @@ export default function FormModalButton() {
                 Description:
               </FormLabel>
               <Textarea
-                disabled={isPending}
+                disabled={addTodoLoading}
                 ref={descriptionRef}
                 id="description"
                 placeholder="Enter description"
@@ -112,11 +106,11 @@ export default function FormModalButton() {
               Cancel
             </Button>
             <Button
-              isLoading={isPending}
+              isLoading={addTodoLoading}
               loadingText="Adding"
               colorScheme="blue"
               onClick={handleSave}
-              disabled={isPending}
+              disabled={addTodoLoading}
             >
               Save
             </Button>

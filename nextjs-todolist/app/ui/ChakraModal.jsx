@@ -95,9 +95,9 @@ export default function ChakraModal() {
                     Register
                   </span>
                 </p>
-                {/* <div className="text-red-500 text-sm font-semibold">
-                  {error?.message}
-                </div> */}
+                <div className="text-red-500 text-sm font-semibold">
+                  {error?.response.data}
+                </div>
               </div>
             </ModalBody>
 
