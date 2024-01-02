@@ -22,6 +22,7 @@ export default function ChakraModal() {
   const finalRef = useRef(null);
 
   const {
+    homeLogin,
     showPassword,
     setShowPassword,
     isActive,
@@ -29,24 +30,18 @@ export default function ChakraModal() {
     handleReset,
     initialRef,
     isOpen,
-    onOpen,
     onClose,
-    login,
-    isPending: loginLoading,
-    error,
+    loginLoading,
+    loginError,
+    handleLogin,
+    registerLoading,
+    registerError,
+    handleRegister,
   } = useAuthContext();
-
-  async function handleLogin() {
-    await login({
-      email: initialRef.current.value,
-      password: passwordRef.current.value,
-    });
-    onClose();
-  }
 
   return (
     <>
-      <Button onClick={onOpen} h="30px" fontSize=".8rem">
+      <Button onClick={homeLogin} h="30px" fontSize=".8rem">
         Login
       </Button>
       {isActive ? (
@@ -102,7 +97,7 @@ export default function ChakraModal() {
                   </span>
                 </p>
                 <div className="text-red-500 text-sm font-semibold">
-                  {error?.response.data}
+                  {loginError?.response.data}
                 </div>
               </div>
             </ModalBody>
@@ -137,13 +132,18 @@ export default function ChakraModal() {
             <ModalBody>
               <FormControl>
                 <FormLabel>Email</FormLabel>
-                <Input ref={initialRef} placeholder="enter your email" />
+                <Input
+                  ref={initialRef}
+                  placeholder="enter your email"
+                  disabled={registerLoading}
+                />
               </FormControl>
 
               <FormControl mt={4}>
                 <FormLabel>Password</FormLabel>
                 <InputGroup>
                   <Input
+                    disabled={registerLoading}
                     ref={passwordRef}
                     placeholder="password"
                     type={`${showPassword ? "text" : "password"}`}
@@ -172,13 +172,20 @@ export default function ChakraModal() {
                 </p>
 
                 <div className="text-red-500 text-sm font-semibold">
-                  {error}
+                  {registerError?.response.data}
                 </div>
               </div>
             </ModalBody>
 
             <ModalFooter>
-              <Button colorScheme="blue" mr={3}>
+              <Button
+                colorScheme="blue"
+                mr={3}
+                onClick={handleRegister}
+                disabled={registerLoading}
+                loadingText="registering..."
+                isLoading={registerLoading}
+              >
                 Register
               </Button>
               <Button onClick={onClose}>Cancel</Button>

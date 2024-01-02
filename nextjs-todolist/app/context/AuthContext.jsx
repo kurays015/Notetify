@@ -3,6 +3,7 @@ import { createContext, useEffect, useRef, useState } from "react";
 import axios from "../api/axios";
 import { useDisclosure } from "@chakra-ui/react";
 import useLogin from "../hooks/useLogin";
+import useRegister from "../hooks/useRegister";
 
 export const AuthContext = createContext();
 
@@ -14,7 +15,17 @@ export default function AuthContextProvider({ children }) {
   const initialRef = useRef(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const { mutateAsync: login, isPending, isError, error } = useLogin();
+  const {
+    mutateAsync: login,
+    isPending: loginLoading,
+    error: loginError,
+  } = useLogin();
+
+  const {
+    mutateAsync: register,
+    isPending: registerLoading,
+    error: registerError,
+  } = useRegister();
 
   const handleReset = () => {
     setIsActive(prev => !prev);
@@ -30,24 +41,45 @@ export default function AuthContextProvider({ children }) {
     }
   }, []);
 
+  async function handleLogin() {
+    await login({
+      email: initialRef.current.value,
+      password: passwordRef.current.value,
+    });
+    onClose();
+  }
+
+  async function handleRegister() {
+    await register({
+      email: initialRef.current.value,
+      password: passwordRef.current.value,
+    });
+    onClose();
+  }
+
+  function homeLogin() {
+    onOpen();
+    setIsActive(true);
+  }
+
   const value = {
     accessToken,
     setAccessToken,
     showPassword,
     setShowPassword,
     isActive,
-    setIsActive,
-    error,
+    loginError,
     handleReset,
     initialRef,
     passwordRef,
     isOpen,
-    onOpen,
     onClose,
-    login,
-    isPending,
-    isError,
-    error,
+    handleLogin,
+    loginLoading,
+    registerLoading,
+    registerError,
+    handleRegister,
+    homeLogin,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
