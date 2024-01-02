@@ -32,7 +32,7 @@ export default function ChakraModal() {
     onOpen,
     onClose,
     login,
-    isPending,
+    isPending: loginLoading,
     error,
   } = useAuthContext();
 
@@ -62,13 +62,18 @@ export default function ChakraModal() {
             <ModalBody>
               <FormControl position="relative">
                 <FormLabel>Email</FormLabel>
-                <Input ref={initialRef} placeholder="email" />
+                <Input
+                  ref={initialRef}
+                  placeholder="email"
+                  disabled={loginLoading}
+                />
               </FormControl>
 
               <FormControl mt={4}>
                 <FormLabel>Password</FormLabel>
                 <InputGroup>
                   <Input
+                    disabled={loginLoading}
                     ref={passwordRef}
                     placeholder="password"
                     type={`${showPassword ? "text" : "password"}`}
@@ -103,10 +108,10 @@ export default function ChakraModal() {
 
             <ModalFooter>
               <Button
-                isLoading={isPending}
+                isLoading={loginLoading}
                 loadingText="Logging in..."
                 colorScheme="blue"
-                disabled={isPending}
+                disabled={loginLoading}
                 mr={3}
                 onClick={handleLogin}
               >
@@ -117,6 +122,7 @@ export default function ChakraModal() {
           </ModalContent>
         </Modal>
       ) : (
+        //register below
         <Modal
           initialFocusRef={initialRef}
           finalFocusRef={finalRef}
