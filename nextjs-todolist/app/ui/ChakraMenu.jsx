@@ -14,12 +14,13 @@ import useCrudContext from "../hooks/useCrudContext";
 export default function ChakraMenu({ todo, _id }) {
   const { handleInProgress, handleCompleted, handleCurrentTodos } =
     useCrudContext();
+  const { handleDeleteTodos } = useCrudContext();
 
   return (
     <Menu direction="ltr" isLazy={true}>
       <MenuButton as={IconButton} bg="gray" icon={<HiDotsVertical />} />
       <MenuList bg="#242424">
-        {/* <MenuItem
+        <MenuItem
           icon={<CiEdit />}
           bg="#1c1c1c"
           color="white"
@@ -32,10 +33,11 @@ export default function ChakraMenu({ todo, _id }) {
           bg="#1c1c1c"
           color="white"
           fontSize={{ base: ".9rem", sm: "1.1rem" }}
+          onClick={() => handleDeleteTodos(_id)}
         >
           Delete
-        </MenuItem> */}
-        <MenuItem
+        </MenuItem>
+        {/* <MenuItem
           icon={<TbArrowsExchange2 />}
           bg="#1c1c1c"
           color="white"
@@ -61,7 +63,7 @@ export default function ChakraMenu({ todo, _id }) {
           onClick={() => handleCompleted(todo, _id)}
         >
           Completed
-        </MenuItem>
+        </MenuItem> */}
       </MenuList>
     </Menu>
   );

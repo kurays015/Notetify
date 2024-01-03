@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useReducer, useState } from "react";
+import useDeleteTodos from "../hooks/useDeleteTodos";
 
 export const CrudContext = createContext();
 
@@ -8,6 +9,12 @@ export default function CrudContextProvider({ children }) {
   const [inProgress, setInProgress] = useState([]);
   const [completed, setCompleted] = useState([]);
   const [todosData, setTodosData] = useState([]);
+
+  const {
+    mutateAsync: deleteTodo,
+    isPending: deleteLoading,
+    error: deleteError,
+  } = useDeleteTodos();
 
   //need to refactor code below
   function handleInProgress(todo, _id) {
@@ -40,6 +47,10 @@ export default function CrudContextProvider({ children }) {
     setCompleted(updatedCompleted);
   }
 
+  async function handleDeleteTodos(id) {
+    await deleteTodo(id);
+  }
+
   const value = {
     inProgress,
     setInProgress,
@@ -50,6 +61,10 @@ export default function CrudContextProvider({ children }) {
     handleCurrentTodos,
     todosData,
     setTodosData,
+    deleteTodo,
+    deleteLoading,
+    deleteError,
+    handleDeleteTodos,
   };
   return <CrudContext.Provider value={value}>{children}</CrudContext.Provider>;
 }
