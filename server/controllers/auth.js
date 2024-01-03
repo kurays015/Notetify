@@ -73,17 +73,8 @@ async function login(req, res) {
 }
 
 async function logout(req, res) {
-  try {
-    if (!req.user) {
-      return res
-        .status(400)
-        .json({ message: "No user is currently logged in " });
-    }
-    res.clearCookie("accessToken");
-    res.status(200).json("Logout success");
-  } catch (err) {
-    res.status(500).json(err.message);
-  }
+  res.clearCookie("accessToken");
+  res.status(200).json("Logout success");
 }
 
 module.exports = { register, login, logout };
