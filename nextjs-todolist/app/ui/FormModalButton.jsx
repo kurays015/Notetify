@@ -18,12 +18,12 @@ import { FaPlus } from "react-icons/fa";
 import useAddTodos from "../hooks/useAddTodos";
 
 export default function FormModalButton() {
-  const [error, setError] = useState();
+  const [error, setError] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-  const todoRef = useRef();
-  const descriptionRef = useRef();
   const onClose = () => setIsOpen(false);
   const onOpen = () => setIsOpen(true);
+  const todoRef = useRef();
+  const descriptionRef = useRef();
 
   const { mutateAsync: submitTodo, isPending: addTodoLoading } = useAddTodos();
 
