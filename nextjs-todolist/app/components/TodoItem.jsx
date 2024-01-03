@@ -6,7 +6,7 @@ import useCrudContext from "../hooks/useCrudContext";
 export default function TodoItem({ todo, _id, isCompleted, description }) {
   const { update } = useCrudContext();
   return (
-    <div className="p-4 bg-gray-300  rounded-md shadow-md mb-4 relative">
+    <div className="p-4 bg-gray-300  rounded-md shadow-md relative">
       <div className="flex justify-between">
         <h3 className="text-lg font-semibold mb-2 text-black">{todo}</h3>
         <ChakraMenu todo={todo} _id={_id} />

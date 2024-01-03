@@ -23,7 +23,6 @@ export default function ChakraUpdateTodo({ _id }) {
     updateDesRef,
     handleUpdateTodos,
     updateTodoLoading,
-    updateTodoError,
     error,
   } = useCrudContext();
 
