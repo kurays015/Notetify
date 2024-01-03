@@ -16,28 +16,19 @@ import {
 } from "@chakra-ui/react";
 import { FaPlus } from "react-icons/fa";
 import useAddTodos from "../hooks/useAddTodos";
+import useCrudContext from "../hooks/useCrudContext";
 
 export default function FormModalButton() {
-  const [error, setError] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
-  const onClose = () => setIsOpen(false);
-  const onOpen = () => setIsOpen(true);
-  const todoRef = useRef();
-  const descriptionRef = useRef();
-
-  const { mutateAsync: submitTodo, isPending: addTodoLoading } = useAddTodos();
-
-  async function handleSave() {
-    if (todoRef.current.value === "" || descriptionRef.current.value === "") {
-      setError("All fields are required");
-      return;
-    }
-    await submitTodo({
-      todo: todoRef.current.value,
-      description: descriptionRef.current.value,
-    });
-    setIsOpen(false);
-  }
+  const {
+    error,
+    addTodoLoading,
+    isOpen,
+    onClose,
+    onOpen,
+    todoRef,
+    descriptionRef,
+    handleSave,
+  } = useCrudContext();
 
   return (
     <>

@@ -3,6 +3,7 @@
 import { createContext, useReducer, useRef, useState } from "react";
 import useDeleteTodos from "../hooks/useDeleteTodos";
 import useUpdateTodos from "../hooks/useUpdateTodos";
+import useAddTodos from "../hooks/useAddTodos";
 
 export const CrudContext = createContext();
 
@@ -10,27 +11,78 @@ export default function CrudContextProvider({ children }) {
   const [inProgress, setInProgress] = useState([]);
   const [completed, setCompleted] = useState([]);
   const [todosData, setTodosData] = useState([]);
-  const [update, setUpdate] = useState({});
-
-  //update todo
   const [error, setError] = useState("");
+
+  //chakra ui modal state
   const [isOpen, setIsOpen] = useState(false);
   const onClose = () => setIsOpen(false);
   const onOpen = () => setIsOpen(true);
+
+  //add todo states
+  const todoRef = useRef();
+  const descriptionRef = useRef();
+
+  //update todo states
+  const [update, setUpdate] = useState({});
   const updateTodoRef = useRef();
   const updateDesRef = useRef();
 
-  const {
-    mutateAsync: deleteTodo,
-    isPending: deleteLoading,
-    error: deleteError,
-  } = useDeleteTodos();
+  //---------------- add todo---------------------------
 
-  const {
-    mutateAsync: updateTodo,
-    isPending: updateTodoLoading,
-    error: updateTodoError,
-  } = useUpdateTodos();
+  const { mutateAsync: submitTodo, isPending: addTodoLoading } = useAddTodos();
+
+  //add todo/task function
+  async function handleSave() {
+    if (todoRef.current.value === "" || descriptionRef.current.value === "") {
+      setError("All fields are required");
+      return;
+    }
+    await submitTodo({
+      todo: todoRef.current.value,
+      description: descriptionRef.current.value,
+    });
+    setIsOpen(false);
+  }
+
+  //---------------- add todo---------------------------
+
+  //---------------- update todo---------------------------
+
+  const { mutateAsync: updateTodo, isPending: updateTodoLoading } =
+    useUpdateTodos();
+
+  async function handleUpdateTodos(_id) {
+    if (
+      updateTodoRef.current.value === "" ||
+      updateDesRef.current.value === ""
+    ) {
+      setError("All fields are required");
+      return;
+    }
+    await updateTodo({
+      _id,
+      todo: updateTodoRef.current.value,
+      description: updateDesRef.current.value,
+    });
+    setIsOpen(false);
+  }
+
+  const handleOpenUpdateModal = _id => {
+    onOpen();
+    setUpdate(prev => ({ ...prev, [_id]: true }));
+  };
+  //---------------- update todo---------------------------
+
+  //---------------- delete todo---------------------------
+
+  const { mutateAsync: deleteTodo, isPending: deleteLoading } =
+    useDeleteTodos();
+
+  async function handleDeleteTodos(id) {
+    await deleteTodo(id);
+  }
+
+  //---------------- delete todo---------------------------
 
   //need to refactor code below
   function handleInProgress(todo, _id) {
@@ -63,31 +115,6 @@ export default function CrudContextProvider({ children }) {
     setCompleted(updatedCompleted);
   }
 
-  async function handleDeleteTodos(id) {
-    await deleteTodo(id);
-  }
-
-  async function handleUpdateTodos(_id) {
-    if (
-      updateTodoRef.current.value === "" ||
-      updateDesRef.current.value === ""
-    ) {
-      setError("All fields are required");
-      return;
-    }
-    await updateTodo({
-      _id,
-      todo: updateTodoRef.current.value,
-      description: updateDesRef.current.value,
-    });
-    setIsOpen(false);
-  }
-
-  const handleOpenUpdateModal = _id => {
-    onOpen();
-    setUpdate(prev => ({ ...prev, [_id]: true }));
-  };
-
   const value = {
     inProgress,
     setInProgress,
@@ -100,7 +127,6 @@ export default function CrudContextProvider({ children }) {
     setTodosData,
     deleteTodo,
     deleteLoading,
-    deleteError,
     handleDeleteTodos,
     isOpen,
     onClose,
@@ -112,8 +138,11 @@ export default function CrudContextProvider({ children }) {
     handleUpdateTodos,
     error,
     updateTodoLoading,
-    updateTodoError,
     handleOpenUpdateModal,
+    handleSave,
+    todoRef,
+    descriptionRef,
+    addTodoLoading,
   };
   return <CrudContext.Provider value={value}>{children}</CrudContext.Provider>;
 }
