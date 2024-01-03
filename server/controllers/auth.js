@@ -63,7 +63,7 @@ async function login(req, res) {
       .cookie("accessToken", accessToken, {
         httpOnly: true,
         secure: true,
-        // sameSite: "Strict",
+        sameSite: "Strict",
       })
       .status(200)
       .json(user._id);
