@@ -16,9 +16,11 @@ import {
 } from "@chakra-ui/react";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 import useAuthContext from "../hooks/useAuthContext";
+import useLogout from "../hooks/useLogout";
 
 export default function ChakraModal() {
   const {
+    accessToken,
     homeLogin,
     showPassword,
     setShowPassword,
@@ -30,18 +32,24 @@ export default function ChakraModal() {
     isOpen,
     onClose,
     loginLoading,
-    loginError,
     handleLogin,
     registerLoading,
-    registerError,
     handleRegister,
   } = useAuthContext();
 
+  const { mutateAsync: logout, isPending: logoutLoading } = useLogout();
+
   return (
     <>
-      <Button onClick={homeLogin} h="30px" fontSize=".8rem">
-        Login
-      </Button>
+      {accessToken ? (
+        <Button onClick={() => logout()} h="30px" fontSize=".8rem">
+          Logout
+        </Button>
+      ) : (
+        <Button onClick={homeLogin} h="30px" fontSize=".8rem">
+          Login
+        </Button>
+      )}
       {isActive ? (
         <Modal
           initialFocusRef={initialRef}
@@ -94,9 +102,6 @@ export default function ChakraModal() {
                     Register
                   </span>
                 </p>
-                <div className="text-red-500 text-sm font-semibold">
-                  {loginError?.response.data}
-                </div>
               </div>
             </ModalBody>
 
@@ -168,10 +173,6 @@ export default function ChakraModal() {
                     Login
                   </span>
                 </p>
-
-                <div className="text-red-500 text-sm font-semibold">
-                  {registerError?.response.data}
-                </div>
               </div>
             </ModalBody>
 

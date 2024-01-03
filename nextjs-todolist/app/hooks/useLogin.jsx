@@ -11,6 +11,7 @@ export default function useLogin() {
     onSuccess: ({ data: accessToken }) => {
       if (accessToken) {
         localStorage.setItem("accessToken", accessToken);
+        queryClient.invalidateQueries(["todos"]);
       }
       toast({
         title: "Successfully logged in",

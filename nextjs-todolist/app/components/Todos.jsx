@@ -5,6 +5,7 @@ import useCrudContext from "../hooks/useCrudContext";
 import { useEffect } from "react";
 import Image from "next/image";
 import img from "../../public/todoimg.jpg";
+import ChakraSpinner from "../ui/ChakraSpinner";
 
 export default function Todos() {
   const { data: todos, isLoading, isError, error } = useGetTodos();
@@ -16,8 +17,13 @@ export default function Todos() {
     }
   }, [todos]);
 
-  if (isLoading) return <h1 className="">Todos Loading...</h1>;
-  if (isError) return <h1 className="">You must be logged in...</h1>;
+  if (isLoading) return <ChakraSpinner />;
+  if (isError)
+    return (
+      <h1 className="my-12 font-semibold text-center text-xl">
+        You must be logged in...
+      </h1>
+    );
 
   return (
     <div className="flex flex-col md:flex-row items-start justify-center gap-6 md:gap-10 text-white text-2xl mt-5">

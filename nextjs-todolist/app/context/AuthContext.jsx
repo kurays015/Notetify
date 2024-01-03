@@ -15,17 +15,9 @@ export default function AuthContextProvider({ children }) {
   const finalRef = useRef(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const {
-    mutateAsync: login,
-    isPending: loginLoading,
-    error: loginError,
-  } = useLogin();
+  const { mutateAsync: login, isPending: loginLoading } = useLogin();
 
-  const {
-    mutateAsync: register,
-    isPending: registerLoading,
-    error: registerError,
-  } = useRegister();
+  const { mutateAsync: register, isPending: registerLoading } = useRegister();
 
   const handleReset = () => {
     setIsActive(prev => !prev);
@@ -68,7 +60,6 @@ export default function AuthContextProvider({ children }) {
     showPassword,
     setShowPassword,
     isActive,
-    loginError,
     handleReset,
     initialRef,
     passwordRef,
@@ -78,7 +69,6 @@ export default function AuthContextProvider({ children }) {
     handleLogin,
     loginLoading,
     registerLoading,
-    registerError,
     handleRegister,
     homeLogin,
   };
