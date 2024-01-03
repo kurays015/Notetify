@@ -9,7 +9,6 @@ export default function useLogin() {
     mutationFn: async credentials =>
       await axios.post("/auth/login", credentials),
     onSuccess: ({ data: access }) => {
-      localStorage.setItem("access", access);
       queryClient.invalidateQueries(["todos"]);
       toast({
         title: "Successfully logged in",
