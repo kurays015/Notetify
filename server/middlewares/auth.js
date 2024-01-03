@@ -7,7 +7,7 @@ module.exports = async function requireAuth(req, res, next) {
     if (!token) {
       throw new Error("Unauthorize, no token found");
     }
-    jwt.verify(token, process.env.ACCESS_TOKEN, (err, decoded) => {
+    jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
       if (err) {
         throw new Error("Invalid credentials");
       }

@@ -5,7 +5,7 @@ const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 
 function generateAccessToken(payload) {
-  return jwt.sign(payload, process.env.ACCESS_TOKEN, { expiresIn: "7d" });
+  return jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: "7d" });
 }
 
 async function register(req, res) {
