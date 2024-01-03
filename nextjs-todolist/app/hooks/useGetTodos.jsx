@@ -6,7 +6,6 @@ export default function useGetTodos() {
     queryKey: ["todos"],
     queryFn: async () => {
       const { data } = await axios.get("/todos");
-
       return data;
     },
   });

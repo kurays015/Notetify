@@ -1,5 +1,6 @@
-module.exports = corsOptions = {
+const corsOptions = {
   origin: "https://notetify.vercel.app", // https://notetify.vercel.app - frontend url
   credentials: true,
 };
-// https://notetify.vercel.app/
+
+module.exports = corsOptions;
