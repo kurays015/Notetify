@@ -35,7 +35,7 @@ export default function Todos() {
           {todosData?.length ? (
             todosData?.map(todo => <TodoItem {...todo} key={todo._id} />)
           ) : (
-            <Image src={img} qualtiy={100} alt="Empty todo-list" />
+            <Image src={img} qualtiy={100} alt="Empty todo-list" priority />
           )}
         </div>
       </div>
@@ -47,7 +47,7 @@ export default function Todos() {
           {inProgress.length ? (
             inProgress.map(todo => <TodoItem {...todo} key={todo._id} />)
           ) : (
-            <Image src={img} qualtiy={100} alt="Empty todo-list" />
+            <Image src={img} qualtiy={100} alt="Empty todo-list" priority />
           )}
         </div>
       </div>
@@ -59,7 +59,7 @@ export default function Todos() {
           {completed.length ? (
             completed.map(todo => <TodoItem {...todo} key={todo._id} />)
           ) : (
-            <Image src={img} qualtiy={100} alt="Empty todo-list" />
+            <Image src={img} qualtiy={100} alt="Empty todo-list" priority />
           )}
         </div>
       </div>
