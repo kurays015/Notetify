@@ -37,9 +37,11 @@ export default function Todos() {
           In Progress
         </h1>
         <div className="p-4">
-          {inProgress.map(todo => (
-            <TodoItem {...todo} key={todo._id} />
-          ))}
+          {inProgress.length ? (
+            inProgress.map(todo => <TodoItem {...todo} key={todo._id} />)
+          ) : (
+            <p className="text-center italic">no todos...</p>
+          )}
         </div>
       </div>
       <div className="w-full max-h-[500px] bg-green-400 rounded-lg overflow-hidden overflow-y-auto">
@@ -47,9 +49,11 @@ export default function Todos() {
           Completed
         </h1>
         <div className="p-4">
-          {completed.map(todo => (
-            <TodoItem {...todo} key={todo._id} />
-          ))}
+          {completed.length ? (
+            completed.map(todo => <TodoItem {...todo} key={todo._id} />)
+          ) : (
+            <p className="text-center italic">no todos...</p>
+          )}
         </div>
       </div>
     </div>
