@@ -15,5 +15,12 @@ export default function useDeleteTodos() {
         isClosable: true,
       });
     },
+    onError: () => {
+      toast({
+        title: "Something went wrong, try again later",
+        status: "error",
+        isClosable: true,
+      });
+    },
   });
 }

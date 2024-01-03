@@ -11,5 +11,12 @@ export default function useRegister() {
         isClosable: true,
       });
     },
+    onError: () => {
+      toast({
+        title: "Something went wrong, try again later",
+        status: "error",
+        isClosable: true,
+      });
+    },
   });
 }

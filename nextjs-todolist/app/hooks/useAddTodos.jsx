@@ -16,5 +16,12 @@ export default function useAddTodos() {
         duration: "3000",
       });
     },
+    onError: () => {
+      toast({
+        title: "Something went wrong, try again later",
+        status: "error",
+        isClosable: true,
+      });
+    },
   });
 }
