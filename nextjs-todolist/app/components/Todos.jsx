@@ -8,7 +8,7 @@ import img from "../../public/todoimg.jpg";
 import ChakraSpinner from "../ui/ChakraSpinner";
 
 export default function Todos() {
-  const { data: todos, isLoading, isError, error } = useGetTodos();
+  const { data: todos, isLoading, isError } = useGetTodos();
   const { inProgress, completed, todosData, setTodosData } = useCrudContext();
 
   useEffect(() => {

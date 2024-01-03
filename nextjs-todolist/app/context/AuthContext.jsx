@@ -3,11 +3,11 @@ import { createContext, useEffect, useRef, useState } from "react";
 import { useDisclosure } from "@chakra-ui/react";
 import useLogin from "../hooks/useLogin";
 import useRegister from "../hooks/useRegister";
+import useLogout from "../hooks/useLogout";
 
 export const AuthContext = createContext();
 
 export default function AuthContextProvider({ children }) {
-  const [accessToken, setAccessToken] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const [isActive, setIsActive] = useState(true);
   const passwordRef = useRef(null);
@@ -16,8 +16,9 @@ export default function AuthContextProvider({ children }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const { mutateAsync: login, isPending: loginLoading } = useLogin();
-
   const { mutateAsync: register, isPending: registerLoading } = useRegister();
+
+  const { mutateAsync: logout, isPending: logoutLoading } = useLogout();
 
   const handleReset = () => {
     setIsActive(prev => !prev);
@@ -25,13 +26,6 @@ export default function AuthContextProvider({ children }) {
     passwordRef.current.value = "";
     initialRef.current.value = "";
   };
-
-  useEffect(() => {
-    const token = localStorage.getItem("accessToken");
-    if (token) {
-      setAccessToken(token);
-    }
-  }, []);
 
   async function handleLogin() {
     await login({
@@ -55,8 +49,6 @@ export default function AuthContextProvider({ children }) {
   }
 
   const value = {
-    accessToken,
-    setAccessToken,
     showPassword,
     setShowPassword,
     isActive,
@@ -71,6 +63,8 @@ export default function AuthContextProvider({ children }) {
     registerLoading,
     handleRegister,
     homeLogin,
+    logout,
+    logoutLoading,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

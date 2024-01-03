@@ -13,14 +13,23 @@ import {
   InputRightElement,
   IconButton,
   InputGroup,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuGroup,
+  MenuItem,
+  MenuDivider,
 } from "@chakra-ui/react";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
+import { IoIosArrowDropdown } from "react-icons/io";
+
 import useAuthContext from "../hooks/useAuthContext";
-import useLogout from "../hooks/useLogout";
+import { useEffect, useState } from "react";
 
 export default function ChakraModal() {
+  const [userAccess, setUserAccess] = useState(null);
+
   const {
-    accessToken,
     homeLogin,
     showPassword,
     setShowPassword,
@@ -35,21 +44,23 @@ export default function ChakraModal() {
     handleLogin,
     registerLoading,
     handleRegister,
+    logout,
+    logoutLoading,
   } = useAuthContext();
-
-  const { mutateAsync: logout, isPending: logoutLoading } = useLogout();
 
   return (
     <>
-      {accessToken ? (
-        <Button onClick={() => logout()} h="30px" fontSize=".8rem">
-          Logout
-        </Button>
-      ) : (
-        <Button onClick={homeLogin} h="30px" fontSize=".8rem">
-          Login
-        </Button>
-      )}
+      <Menu autoSelect={false}>
+        <MenuButton>
+          <IoIosArrowDropdown className="text-gray-800 text-2xl" />
+        </MenuButton>
+        <MenuList>
+          <MenuItem onClick={homeLogin}>Login</MenuItem>
+          <MenuDivider />
+          <MenuItem onClick={() => logout()}>Logout</MenuItem>
+        </MenuList>
+      </Menu>
+
       {isActive ? (
         <Modal
           initialFocusRef={initialRef}
