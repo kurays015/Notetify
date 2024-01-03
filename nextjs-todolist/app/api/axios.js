@@ -1,6 +1,11 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: "https://notetify-server.onrender.com/",
+  baseURL: "http://localhost:3001",
   withCredentials: true,
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
+
+// https://notetify-server.onrender.com/
