@@ -66,7 +66,7 @@ async function login(req, res) {
         sameSite: "Strict",
       })
       .status(200)
-      .json(accessToken);
+      .json(user._id);
   } catch (err) {
     res.status(500).json(err.message);
   }
