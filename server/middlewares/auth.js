@@ -2,7 +2,6 @@ const jwt = require("jsonwebtoken");
 
 module.exports = async function requireAuth(req, res, next) {
   const token = req.cookies?.accessToken;
-
   try {
     console.log("Received token:", token);
 

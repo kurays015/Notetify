@@ -1,5 +1,6 @@
 const corsOptions = {
-  origin: `${process.env.ORIGIN}`, //  - frontend url
+  origin: ["http://localhost:3000", `${process.env.ORIGIN}`],
+  //  - frontend url
   credentials: true,
 };
 
