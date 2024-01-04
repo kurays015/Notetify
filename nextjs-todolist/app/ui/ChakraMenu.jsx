@@ -12,8 +12,13 @@ import { TbArrowsExchange2 } from "react-icons/tb";
 import useCrudContext from "../hooks/useCrudContext";
 
 export default function ChakraMenu({ todo, _id }) {
-  const { handleOpenUpdateModal, handleDeleteTodos, handleInProgress } =
-    useCrudContext();
+  const {
+    handleOpenUpdateModal,
+    handleDeleteTodos,
+    handleInProgress,
+    handleCompleted,
+    handleCurrentTodos,
+  } = useCrudContext();
 
   return (
     <Menu direction="ltr" isLazy={true}>
@@ -37,7 +42,7 @@ export default function ChakraMenu({ todo, _id }) {
         >
           Delete
         </MenuItem>
-        {/* <MenuItem
+        <MenuItem
           icon={<TbArrowsExchange2 />}
           bg="#1c1c1c"
           color="white"
@@ -45,7 +50,7 @@ export default function ChakraMenu({ todo, _id }) {
           onClick={() => handleCurrentTodos(todo, _id)}
         >
           Current Todos
-        </MenuItem> */}
+        </MenuItem>
         <MenuItem
           icon={<TbArrowsExchange2 />}
           bg="#1c1c1c"
@@ -55,7 +60,7 @@ export default function ChakraMenu({ todo, _id }) {
         >
           In Progress
         </MenuItem>
-        {/* <MenuItem
+        <MenuItem
           icon={<TbArrowsExchange2 />}
           bg="#1c1c1c"
           color="white"
@@ -63,7 +68,7 @@ export default function ChakraMenu({ todo, _id }) {
           onClick={() => handleCompleted(todo, _id)}
         >
           Completed
-        </MenuItem> */}
+        </MenuItem>
       </MenuList>
     </Menu>
   );
