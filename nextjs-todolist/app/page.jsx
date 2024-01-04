@@ -14,6 +14,7 @@ export default function Home() {
       <small className="fixed bottom-5 w-full text-center text-slate-800">
         Made with ❤️ by Christ...
       </small>
+      <p>{process.env.NEXT_PUBLIC_BACKEND_URL}</p>
     </>
   );
 }
