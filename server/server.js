@@ -13,7 +13,7 @@ const userRoute = require("./routes/user");
 const requireAuth = require("./middlewares/auth");
 const corsOptions = require("./config/corsOption");
 const app = express();
-
+const dat
 //middlewares
 app.use(cors());
 app.use(cookieParser());
