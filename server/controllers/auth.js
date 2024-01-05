@@ -60,17 +60,7 @@ async function login(req, res) {
     }
     const payload = { user_id: user._id };
     const accessToken = generateAccessToken(payload);
-
-    res
-      .cookie("accessToken", accessToken, {
-        httpOnly: true,
-        secure: true,
-        maxAge: MAX_AGE,
-        sameSite: "strict",
-        path: "/",
-      })
-      .status(200)
-      .json(user._id);
+    res.status(200).json(accessToken);
   } catch (err) {
     res.status(500).json(err.message);
   }
