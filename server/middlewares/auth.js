@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 module.exports = async function requireAuth(req, res, next) {
    try {
     const authorizationHeader = req.headers['authorization'];
-
+   console.log(authorizationHeader)
     if (!authorizationHeader || !authorizationHeader.startsWith('Bearer ')) {
       throw new Error('Unauthorized, no token found');
     }
