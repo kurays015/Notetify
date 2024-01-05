@@ -15,7 +15,6 @@ export default function useLogout() {
         duration: "3000",
       });
       queryClient.invalidateQueries(["todos"]);
-      localStorage.removeItem("accessToken");
     },
     onError: ({ response }) => {
       toast({

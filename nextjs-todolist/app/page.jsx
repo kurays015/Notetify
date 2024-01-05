@@ -1,19 +1,9 @@
-import Todos from "./components/Todos";
-import ChakraButton from "./ui/ChakraButton";
-import Header from "./components/Header";
+import ChakraLoginRegister from "./ui/ChakraLoginRegister";
 
 export default function Home() {
   return (
-    <>
-      <main className="p-6">
-        {/* ----> login, dark mode  */}
-        <ChakraButton />
-        <Header />
-        <Todos />
-      </main>
-      <small className="fixed bottom-5 w-full text-center text-slate-800">
-        Made with ❤️ by Christ...
-      </small>
-    </>
+    <main className="pt-36 pb-12 px-3">
+      <ChakraLoginRegister />
+    </main>
   );
 }

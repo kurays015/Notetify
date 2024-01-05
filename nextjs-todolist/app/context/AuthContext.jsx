@@ -1,6 +1,5 @@
 "use client";
 import { createContext, useEffect, useRef, useState } from "react";
-import { useDisclosure } from "@chakra-ui/react";
 import useLogin from "../hooks/useLogin";
 import useRegister from "../hooks/useRegister";
 import useLogout from "../hooks/useLogout";
@@ -11,41 +10,35 @@ export default function AuthContextProvider({ children }) {
   const [showPassword, setShowPassword] = useState(false);
   const [isActive, setIsActive] = useState(true);
   const passwordRef = useRef(null);
-  const initialRef = useRef(null);
-  const finalRef = useRef(null);
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const emailRef = useRef(null);
 
-  const { mutateAsync: login, isPending: loginLoading } = useLogin();
+  const {
+    mutateAsync: login,
+    isPending: loginLoading,
+    error: loginError,
+  } = useLogin();
   const { mutateAsync: register, isPending: registerLoading } = useRegister();
-
-  const { mutateAsync: logout, isPending: logoutLoading } = useLogout();
+  const { mutate: logout, isPending: logoutLoading } = useLogout();
 
   const handleReset = () => {
     setIsActive(prev => !prev);
     setShowPassword(false);
     passwordRef.current.value = "";
-    initialRef.current.value = "";
+    emailRef.current.value = "";
   };
 
   async function handleLogin() {
     await login({
-      email: initialRef.current.value,
+      email: emailRef.current.value,
       password: passwordRef.current.value,
     });
-    onClose();
   }
 
   async function handleRegister() {
     await register({
-      email: initialRef.current.value,
+      email: emailRef.current.value,
       password: passwordRef.current.value,
     });
-    onClose();
-  }
-
-  function homeLogin() {
-    onOpen();
-    setIsActive(true);
   }
 
   const value = {
@@ -53,16 +46,13 @@ export default function AuthContextProvider({ children }) {
     setShowPassword,
     isActive,
     handleReset,
-    initialRef,
+    emailRef,
     passwordRef,
-    finalRef,
-    isOpen,
-    onClose,
     handleLogin,
     loginLoading,
+    loginError,
     registerLoading,
     handleRegister,
-    homeLogin,
     logout,
     logoutLoading,
   };
