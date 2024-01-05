@@ -28,6 +28,9 @@ export default function AuthContextProvider({ children }) {
   };
 
   async function handleLogin() {
+    if (emailRef.current.value === "" || passwordRef.current.value === "") {
+      return;
+    }
     await login({
       email: emailRef.current.value,
       password: passwordRef.current.value,
@@ -35,6 +38,9 @@ export default function AuthContextProvider({ children }) {
   }
 
   async function handleRegister() {
+    if (emailRef.current.value === "" || passwordRef.current.value === "") {
+      return;
+    }
     await register({
       email: emailRef.current.value,
       password: passwordRef.current.value,
