@@ -69,7 +69,6 @@ async function login(req, res) {
       })
       .status(200)
       .json(user._id);
-    res.status(200).json(accessToken);
   } catch (err) {
     res.status(500).json(err.message);
   }

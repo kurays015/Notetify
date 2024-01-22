@@ -19,7 +19,7 @@ const app = express();
 app.use(cookieParser());
 app.use(helmet());
 app.use(morgan("dev"));
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
