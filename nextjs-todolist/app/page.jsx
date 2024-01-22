@@ -1,10 +1,15 @@
-import { Button } from "@/components/ui/button";
+import { CardWithForm } from "@/components/CardWithForm";
+import { DialogDemo } from "@/components/DialogDemo";
+import { ThemeToggle } from "@/components/ui/modetoggle";
 
-export default function Home() {
+export default async function Home() {
   return (
-    <div>
-      <h1>Home, start over!</h1>
-      <Button variant="outline">Outline</Button>
-    </div>
+    <main>
+      <div className="text-end p-2">
+        <ThemeToggle />
+      </div>
+      <CardWithForm />
+      <DialogDemo />
+    </main>
   );
 }

@@ -13,13 +13,14 @@ const PORT = 8080 || process.env.PORT;
 const todoRoute = require("./routes/todo");
 const userRoute = require("./routes/user");
 const requireAuth = require("./middlewares/auth");
+const corsOption = require("./config/corsOption");
 const app = express();
 
 //middlewares
 app.use(cookieParser());
+app.use(cors(corsOption));
 app.use(helmet());
 app.use(morgan("dev"));
-app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
