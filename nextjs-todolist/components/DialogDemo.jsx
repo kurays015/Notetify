@@ -33,7 +33,6 @@ export function DialogDemo() {
                 Email
               </Label>
               <Input
-                ref={emailRef}
                 name="email"
                 id="email"
                 className="col-span-3"
@@ -45,7 +44,6 @@ export function DialogDemo() {
                 Password
               </Label>
               <Input
-                ref={passwordRef}
                 name="password"
                 type="password"
                 id="password"
