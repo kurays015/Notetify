@@ -1,27 +1,26 @@
-"use client";
 import { CardWithForm } from "@/components/CardWithForm";
 import { DialogDemo } from "@/components/DialogDemo";
 import { ThemeToggle } from "@/components/ui/modetoggle";
 import axios from "axios";
-import { useEffect, useState } from "react";
 
-export default function Home() {
-  const [todos, setTodos] = useState([]);
-  // https://notetify-server.onrender.com/todos
-  useEffect(() => {
-    async function getTodos() {
-      const { data } = await axios.get(
-        "https://notetify-server.onrender.com/todos",
-        {
-          withCredentials: true,
-        }
-      );
-      setTodos(data);
-    }
-    getTodos();
-  }, []);
+async function getTodos() {
+  try {
+    const { data } = await axios.get(
+      `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/todos`,
+      {
+        withCredentials: true,
+      }
+    );
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
 
-  console.log(todos);
+export default async function Home() {
+  // https://notetify-server.onrender.com/todos - NEED TO BRING THIS BACK ON DEPLOYMENT!
+
+  const todos = await getTodos();
 
   return (
     <main>

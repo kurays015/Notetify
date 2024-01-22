@@ -11,25 +11,9 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import axios from "axios";
-import { useRef } from "react";
+import handleSubmit from "@/app/api/login";
+
 export function DialogDemo() {
-  const emailRef = useRef();
-  const passwordRef = useRef();
-  async function handleSubmit(e) {
-    e.preventDefault();
-    const res = await axios.post(
-      "https://notetify-server.onrender.com/auth/login",
-      {
-        email: emailRef.current.value,
-        password: passwordRef.current.value,
-      },
-      {
-        withCredentials: true,
-      }
-    );
-    console.log(res);
-  }
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -42,7 +26,7 @@ export function DialogDemo() {
             We miss you!
           </DialogDescription>
         </DialogHeader>
-        <form onSubmit={handleSubmit}>
+        <form action={handleSubmit}>
           <div className="grid gap-4 py-4">
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="email" className="text-right">
