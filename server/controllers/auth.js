@@ -64,7 +64,7 @@ async function login(req, res) {
         httpOnly: true,
         secure: true,
         maxAge: MAX_AGE,
-        sameSite: "strict",
+        sameSite: "none",
         path: "/",
       })
       .status(200)

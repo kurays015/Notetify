@@ -19,7 +19,7 @@ export function DialogDemo() {
   async function handleSubmit(e) {
     e.preventDefault();
     const res = await axios.post(
-      "http://localhost:8080/auth/login",
+      "https://notetify-server.onrender.com/auth/login",
       {
         email: emailRef.current.value,
         password: passwordRef.current.value,
