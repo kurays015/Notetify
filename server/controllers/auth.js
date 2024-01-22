@@ -58,6 +58,7 @@ async function login(req, res) {
     }
     const payload = { user_id: user._id };
     const accessToken = generateAccessToken(payload);
+<<<<<<< HEAD
 
     res
       .cookie("accessToken", accessToken, {
@@ -69,6 +70,9 @@ async function login(req, res) {
       })
       .status(200)
       .json(user._id);
+=======
+    res.status(200).json(accessToken);
+>>>>>>> 9dd02141401f34b42ee8f1f32f196c27d9074666
   } catch (err) {
     res.status(500).json(err.message);
   }
