@@ -58,28 +58,18 @@ async function login(req, res) {
     }
     const payload = { user_id: user._id };
     const accessToken = generateAccessToken(payload);
-<<<<<<< HEAD
 
     res
       .cookie("accessToken", accessToken, {
         httpOnly: true,
-<<<<<<< HEAD
-        // secure: true,
-        // maxAge: MAX_AGE,
-        // sameSite: "strict",
-        // path: "/",
-=======
         secure: true,
         maxAge: MAX_AGE,
-        // sameSite: "strict",
+        sameSite: "strict",
         path: "/",
->>>>>>> 039f57e62f9a5af33eedd01595c4dc07549e5237
       })
       .status(200)
       .json(user._id);
-=======
     res.status(200).json(accessToken);
->>>>>>> 9dd02141401f34b42ee8f1f32f196c27d9074666
   } catch (err) {
     res.status(500).json(err.message);
   }

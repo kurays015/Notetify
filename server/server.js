@@ -14,14 +14,9 @@ const todoRoute = require("./routes/todo");
 const userRoute = require("./routes/user");
 const requireAuth = require("./middlewares/auth");
 const app = express();
-<<<<<<< HEAD
 
-=======
->>>>>>> 9dd02141401f34b42ee8f1f32f196c27d9074666
 //middlewares
-
 app.use(cookieParser());
-<<<<<<< HEAD
 app.use(helmet());
 app.use(morgan("dev"));
 app.use(cors(corsOptions));
