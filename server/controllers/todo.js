@@ -2,10 +2,10 @@ const Todo = require("../models/todo");
 
 async function getAllTodos(req, res) {
   //req.user.id = will use to find each user todos
-  // const { userId } = req.user;
+  const { userId } = req.user;
 
   try {
-    const allTodos = await Todo.find({}).sort({ createdAt: -1 });
+    const allTodos = await Todo.find({ userId }).sort({ createdAt: -1 });
     res.status(200).json(allTodos);
   } catch (err) {
     res.status(400).json({ error: err.message });
@@ -24,9 +24,9 @@ async function eachTodo(req, res) {
 
 async function postTodos(req, res) {
   try {
-    // const { userId } = req.user;
+    const { userId } = req.user;
     const { todo, description } = req.body;
-    const createTodo = await Todo.create({ todo, description });
+    const createTodo = await Todo.create({ todo, description, userId });
     res.status(200).json(createTodo);
   } catch (err) {
     res.status(400).json({ error: err.message });

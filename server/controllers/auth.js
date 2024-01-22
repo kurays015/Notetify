@@ -32,8 +32,6 @@ async function register(req, res) {
       const hashedPassword = bcrypt.hashSync(password, salt);
       await User.create({ email, password: hashedPassword });
       res.status(201).json("New user Created");
-    } else {
-      res.status(403).json("Please provide a strong password");
     }
   } catch (err) {
     res.status(500).json(err.message);
@@ -64,10 +62,10 @@ async function login(req, res) {
     res
       .cookie("accessToken", accessToken, {
         httpOnly: true,
-        secure: true,
-        maxAge: MAX_AGE,
-        sameSite: "strict",
-        path: "/",
+        // secure: true,
+        // maxAge: MAX_AGE,
+        // sameSite: "strict",
+        // path: "/",
       })
       .status(200)
       .json(user._id);

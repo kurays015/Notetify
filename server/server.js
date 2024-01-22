@@ -1,6 +1,8 @@
 //dependencies
 const express = require("express");
 const cors = require("cors");
+const helmet = require("helmet");
+const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 require("dotenv").config();
@@ -11,18 +13,19 @@ const PORT = 8080 || process.env.PORT;
 const todoRoute = require("./routes/todo");
 const userRoute = require("./routes/user");
 const requireAuth = require("./middlewares/auth");
-const corsOptions = require("./config/corsOption");
 const app = express();
-const dat
+
 //middlewares
 app.use(cors());
 app.use(cookieParser());
+app.use(helmet());
+app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //require auth
 app.use("/auth", userRoute);
-// app.use(requireAuth);
+app.use(requireAuth);
 
 //private routes
 app.use("/todos", todoRoute);
