@@ -24,9 +24,7 @@ app.use(cookieParser());
 <<<<<<< HEAD
 app.use(helmet());
 app.use(morgan("dev"));
-=======
 app.use(cors(corsOptions));
->>>>>>> 9dd02141401f34b42ee8f1f32f196c27d9074666
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

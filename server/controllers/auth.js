@@ -63,10 +63,17 @@ async function login(req, res) {
     res
       .cookie("accessToken", accessToken, {
         httpOnly: true,
+<<<<<<< HEAD
         // secure: true,
         // maxAge: MAX_AGE,
         // sameSite: "strict",
         // path: "/",
+=======
+        secure: true,
+        maxAge: MAX_AGE,
+        // sameSite: "strict",
+        path: "/",
+>>>>>>> 039f57e62f9a5af33eedd01595c4dc07549e5237
       })
       .status(200)
       .json(user._id);
