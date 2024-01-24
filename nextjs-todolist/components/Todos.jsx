@@ -2,6 +2,7 @@
 import { useGetTodos } from "@/app/hooks/useGetTodos";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Todos() {
   const user = Cookies.get("user");
@@ -12,7 +13,12 @@ export default function Todos() {
     isError: todoError,
   } = useGetTodos();
 
-  if (!user) router.push("/");
+  useEffect(() => {
+    if (!user) {
+      router.push("/");
+    }
+  }, []);
+
   if (todoError) return <div>Login first!</div>;
   if (todosLoading) return <h1>Loading...</h1>;
 
