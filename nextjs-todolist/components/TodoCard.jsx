@@ -3,6 +3,7 @@ import { useGetTodos } from "@/app/hooks/useGetTodos";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import TodoItem from "./TodoItem";
 
 export default function Todos() {
   const user = Cookies.get("user");
@@ -25,10 +26,7 @@ export default function Todos() {
   return (
     <div>
       {todos?.map(todo => (
-        <div key={todo._id}>
-          <h1>{todo.title}</h1>
-          <p>{todo.description}</p>
-        </div>
+        <TodoItem {...todo} key={todo._id} />
       ))}
     </div>
   );

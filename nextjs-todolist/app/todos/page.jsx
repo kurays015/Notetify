@@ -1,4 +1,4 @@
-import Todos from "@/components/Todos";
+import TodoCard from "@/components/TodoCard";
 export default function TodoPage() {
-  return <Todos />;
+  return <TodoCard />;
 }
