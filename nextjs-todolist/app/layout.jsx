@@ -1,6 +1,8 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import ReactQueryProvider from "./providers/ReactQueryProvider";
+import { ThemeToggle } from "@/components/ui/modetoggle";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -12,7 +14,10 @@ export default function RootLayout({ children }) {
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className}`} suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="system">
-          {children}
+          <ReactQueryProvider>
+            <ThemeToggle />
+            {children}
+          </ReactQueryProvider>
         </ThemeProvider>
       </body>
     </html>

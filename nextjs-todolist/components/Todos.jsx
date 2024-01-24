@@ -1,32 +1,24 @@
 "use client";
-
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useGetTodos } from "@/app/hooks/useGetTodos";
 
 export default function Todos() {
-  // https://notetify-server.onrender.com/todos - NEED TO BRING THIS BACK ON DEPLOYMENT!
+  const {
+    data: todos,
+    isLoading: todosLoading,
+    isError: todoError,
+  } = useGetTodos();
 
-  const [todos, setTodos] = useState([]);
-  async function getTodos() {
-    try {
-      const { data } = await axios.get(
-        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/todos`,
-        {
-          withCredentials: true,
-        }
-      );
-      setTodos(data);
-    } catch (err) {
-      console.log(err);
-    }
-  }
-  useEffect(() => {
-    getTodos();
-  }, []);
+  if (todoError) return <div>Login first!</div>;
+  if (todosLoading) return <h1>Loading...</h1>;
 
   return (
     <div>
-      {todos && todos.map(todo => <div key={todo._id}>{todo.todo}</div>)}
+      {todos?.map(todo => (
+        <div key={todo._id}>
+          <h1>{todo.title}</h1>
+          <p>{todo.description}</p>
+        </div>
+      ))}
     </div>
   );
 }

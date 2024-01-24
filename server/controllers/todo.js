@@ -25,8 +25,11 @@ async function eachTodo(req, res) {
 async function postTodos(req, res) {
   try {
     const { userId } = req.user;
-    const { todo, description } = req.body;
-    const createTodo = await Todo.create({ todo, description, userId });
+    const { title, description } = req.body;
+    if (!title || !description) {
+      throw new Error("All fields are required");
+    }
+    const createTodo = await Todo.create({ title, description, userId });
     res.status(200).json(createTodo);
   } catch (err) {
     res.status(400).json({ error: err.message });
@@ -35,10 +38,10 @@ async function postTodos(req, res) {
 
 async function updateTodo(req, res) {
   try {
-    const { todo, description, isCompleted } = req.body;
+    const { title, description, isCompleted } = req.body;
     const { id } = req.params;
     const updatedTodo = await Todo.findByIdAndUpdate(id, {
-      todo,
+      title,
       description,
       isCompleted,
     });
