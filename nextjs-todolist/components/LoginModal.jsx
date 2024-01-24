@@ -22,7 +22,7 @@ export function LoginModal() {
             Try now!
           </Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="customSm:max-w-[300px] sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle className="text-center">Welcome back!</DialogTitle>
             <DialogDescription className="text-center">
