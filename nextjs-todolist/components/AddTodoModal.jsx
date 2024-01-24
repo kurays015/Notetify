@@ -26,7 +26,8 @@ export function AddTodoModal() {
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle className="text-center">
-              What&apos;s on your mind?
+              {/* What&apos;s on your mind? */}
+              What?
             </DialogTitle>
           </DialogHeader>
           <AddTodoForm setOpen={setOpen} />
