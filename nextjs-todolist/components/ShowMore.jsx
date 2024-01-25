@@ -78,6 +78,7 @@ export function ShowMore({ id }) {
         </div>
         {status.map(({ name, checked, onCheckedChange }) => (
           <DropdownMenuCheckboxItem
+            key={name}
             checked={checked}
             onCheckedChange={onCheckedChange}
           >
