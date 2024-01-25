@@ -1,15 +1,11 @@
 import { NextResponse } from "next/server";
 
-export function middleware(request) {
-  const cookie = request.cookies.get("accessToken");
-  const { pathname } = request.nextUrl;
+const protectedRoutes = ["/todos"];
 
-  if (!cookie) {
-    return NextResponse.redirect(new URL("/", request.url));
+export default function middleware(req) {
+  const token = req.cookies.get("accessToken");
+  if (!token && protectedRoutes.includes(req.nextUrl.pathname)) {
+    const absoluteURL = new URL("/", req.nextUrl.origin);
+    return NextResponse.redirect(absoluteURL.toString());
   }
-
-  // if (cookie && pathname === "/") {
-  //   return NextResponse.redirect(new URL("/todos", request.url));
-  // }
 }
-export const config = { matcher: ["/todos"] };
