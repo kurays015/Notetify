@@ -5,11 +5,13 @@ import { DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useRef } from "react";
 
 export default function LoginForm({ setOpen }) {
   const emailRef = useRef();
   const passwordRef = useRef();
+  const router = useRouter();
   const {
     mutateAsync: login,
     isPending: loginLoading,
@@ -25,6 +27,7 @@ export default function LoginForm({ setOpen }) {
       password: passwordRef.current.value,
     });
     setOpen(false);
+    router.push("/todos");
   }
   return (
     <form onSubmit={handleLogin}>

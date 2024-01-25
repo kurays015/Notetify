@@ -9,10 +9,20 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import LoginForm from "./LoginForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 export function LoginModal() {
   const [open, setOpen] = useState(false);
+  const user = Cookies.get("user");
+  const router = useRouter();
+
+  // useEffect(() => {
+  //   if (user) {
+  //     router.push("/todos");
+  //   }
+  // }, []);
 
   return (
     <div className="text-center">
