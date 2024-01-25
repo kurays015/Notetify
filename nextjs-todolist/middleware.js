@@ -8,11 +8,8 @@ export function middleware(request) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
-  // if (cookie && pathname === "/") {
-  //   return NextResponse.redirect(new URL("/todos", request.url));
-  // }
+  if (cookie && pathname === "/") {
+    return NextResponse.redirect(new URL("/todos", request.url));
+  }
 }
-
-// export const config = {
-//   matcher: "/((?!api|static|.*\\..*|_next).*)",
-// };
+export const config = { matcher: ["/", "/todos"] };
