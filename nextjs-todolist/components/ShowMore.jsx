@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import useDeleteTodos from "@/app/hooks/useDeleteTodos";
 import { Loader2 } from "lucide-react";
+import { EditTodoModal } from "./EditTodoModal";
 
 export function ShowMore({ id }) {
   const [showStatusBar, setShowStatusBar] = React.useState(true);
@@ -60,9 +61,9 @@ export function ShowMore({ id }) {
           Change Status
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <div className="flex items-center justify-center gap-5 my-2">
+        <div className="flex items-center justify-center gap-5">
           <span>
-            <CiEdit className="cursor-pointer" />
+            <EditTodoModal id={id} />
           </span>
           <span>
             {deleteLoading ? (

@@ -28,7 +28,7 @@ export default function AddTodoForm({ setOpen }) {
     });
     setOpen(false);
   }
-  console.log(addTodoError);
+
   return (
     <form onSubmit={handleAddTodo}>
       <div className="grid gap-4 py-4">
@@ -52,7 +52,7 @@ export default function AddTodoForm({ setOpen }) {
       <DialogFooter>
         <Button type="submit" disabled={addTodoLoading}>
           {addTodoLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-          {addTodoLoading ? "Adding..." : "Add"}{" "}
+          {addTodoLoading ? "Adding..." : "Add"}
         </Button>
       </DialogFooter>
       <p className="text-red-400 text-center mt-4">
