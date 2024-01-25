@@ -12,8 +12,8 @@ export default function useLogin() {
       await axios.post("/auth/login", credentials),
     onSuccess: res => {
       queryClient.invalidateQueries(["todos"]);
+      Cookies.set("user", res.data, "7d");
       router.push("/todos");
-      // Cookies.set("user", res.data, "7d");
     },
   });
 }
