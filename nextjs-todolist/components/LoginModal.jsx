@@ -18,11 +18,11 @@ export function LoginModal() {
   const user = Cookies.get("user");
   const router = useRouter();
 
-  // useEffect(() => {
-  //   if (user) {
-  //     router.push("/todos");
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (user) {
+      router.push("/todos");
+    }
+  }, []);
 
   return (
     <div className="text-center">
