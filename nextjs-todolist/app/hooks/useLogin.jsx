@@ -13,7 +13,7 @@ export default function useLogin() {
     onSuccess: res => {
       queryClient.invalidateQueries(["todos"]);
       router.push("/todos");
-      Cookies.set("user", res.data, "7d");
+      // Cookies.set("user", res.data, "7d");
     },
   });
 }
