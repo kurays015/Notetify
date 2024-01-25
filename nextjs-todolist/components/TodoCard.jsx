@@ -24,11 +24,15 @@ export default function Todos() {
   if (todosLoading) return <h1>Loading...</h1>;
 
   return (
-    <div>
-      <h2>Title</h2>
-      {todos?.map(todo => (
-        <TodoItem {...todo} key={todo._id} />
-      ))}
+    <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 mb-6">
+      <h2 className="text-2xl font-semibold mb-4 text-gray-800 dark:text-white">
+        What&apos;s your todo?
+      </h2>
+      <div className="grid grid-cols-1 gap-4">
+        {todos?.map(todo => (
+          <TodoItem {...todo} key={todo._id} />
+        ))}
+      </div>
     </div>
   );
 }
