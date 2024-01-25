@@ -2,7 +2,7 @@ import { CardContent, CardDescription } from "@/components/ui/card";
 import { DatePicker } from "./DatePicker";
 import { ShowMore } from "./ShowMore";
 
-export default function TodoItem({ title, description }) {
+export default function TodoItem({ title, description, _id }) {
   return (
     <CardContent className="px-4">
       <div className="flex items-center justify-between mb-2">
@@ -11,7 +11,7 @@ export default function TodoItem({ title, description }) {
         </h5>
         <div className="flex items-center">
           <DatePicker />
-          <ShowMore />
+          <ShowMore id={_id} />
         </div>
       </div>
       <CardDescription className="text-start text-xs">

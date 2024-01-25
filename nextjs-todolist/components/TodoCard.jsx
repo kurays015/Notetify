@@ -1,5 +1,5 @@
 "use client";
-import { useGetTodos } from "@/app/hooks/useGetTodos";
+import useGetTodos from "@/app/hooks/useGetTodos";
 import TodoItem from "./TodoItem";
 import * as React from "react";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";

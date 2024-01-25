@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "../api/axios";
 
-export const useGetTodos = () => {
+export default function useGetTodos() {
   return useQuery({
     queryKey: ["todos"],
     queryFn: async () => {
@@ -11,4 +11,4 @@ export const useGetTodos = () => {
       return data;
     },
   });
-};
+}
