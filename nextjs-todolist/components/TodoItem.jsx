@@ -1,6 +1,6 @@
 export default function TodoItem({ title, description }) {
   return (
-    <ul>
+    <ul className="bg-red-200">
       {title}, {description}
     </ul>
   );

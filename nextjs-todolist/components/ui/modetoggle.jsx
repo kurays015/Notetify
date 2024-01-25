@@ -3,7 +3,6 @@
 import * as React from "react";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
-
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -11,17 +10,12 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import Logout from "../Logout";
-import Cookies from "js-cookie";
 
 export function ThemeToggle() {
   const { setTheme } = useTheme();
-  const user = Cookies.get("user");
 
-  console.log("this is user from toggle", user);
   return (
     <div className="p-2 flex items-center justify-end">
-      {/* {user && <Logout />} */}
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="outline" size="icon">
