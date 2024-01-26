@@ -12,6 +12,7 @@ export default function LoginForm({ setOpen }) {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const confirmPasswordRef = useRef(null);
+  const formRef = useRef(null);
   const [register, setRegister] = useState(false);
 
   const {
@@ -50,7 +51,7 @@ export default function LoginForm({ setOpen }) {
   }
 
   return (
-    <form onSubmit={register ? handleRegister : handleLogin}>
+    <form ref={formRef} onSubmit={register ? handleRegister : handleLogin}>
       <div className="grid gap-4 py-4">
         <div className="grid grid-cols-4 items-center gap-4">
           <Label
@@ -101,7 +102,6 @@ export default function LoginForm({ setOpen }) {
             </>
           )}
         </div>
-
         <DialogDescription>
           {register ? (
             <span>Already have an account? </span>
@@ -112,6 +112,7 @@ export default function LoginForm({ setOpen }) {
             className="text-blue-500 cursor-pointer"
             onClick={() => {
               setRegister(prev => !prev);
+              formRef.current.reset();
             }}
           >
             {register ? "Login" : "Register"}
