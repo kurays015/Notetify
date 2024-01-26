@@ -15,22 +15,20 @@ export function AddTodoModal() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="text-center">
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger asChild>
-          <Button variant="none">
-            <CiCirclePlus className="customSm:text-7xl fixed bottom-2 right-2 text-blue-400" />
-          </Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
-          <DialogHeader>
-            <DialogTitle className="text-center">
-              What&apos;s on your mind?
-            </DialogTitle>
-          </DialogHeader>
-          <AddTodoForm setOpen={setOpen} />
-        </DialogContent>
-      </Dialog>
-    </div>
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>
+        <Button variant="none">
+          <CiCirclePlus className="customSm:text-7xl fixed bottom-2 right-2 text-blue-400" />
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle className="text-center">
+            What&apos;s on your mind?
+          </DialogTitle>
+        </DialogHeader>
+        <AddTodoForm setOpen={setOpen} />
+      </DialogContent>
+    </Dialog>
   );
 }

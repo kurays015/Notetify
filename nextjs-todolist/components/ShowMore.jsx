@@ -1,7 +1,6 @@
 "use client";
 import * as React from "react";
 import { BiDotsVertical } from "react-icons/bi";
-import { CiEdit } from "react-icons/ci";
 import { MdDeleteOutline } from "react-icons/md";
 import { Button } from "@/components/ui/button";
 import {
@@ -20,7 +19,6 @@ export function ShowMore({ id }) {
   const [showStatusBar, setShowStatusBar] = React.useState(true);
   const [showActivityBar, setShowActivityBar] = React.useState(false);
   const [showPanel, setShowPanel] = React.useState(false);
-
   const status = [
     {
       name: "Current Todos",
@@ -42,6 +40,7 @@ export function ShowMore({ id }) {
   const {
     mutateAsync: deleteTodo,
     error: deleteError,
+    isError: deleteIsError,
     isPending: deleteLoading,
   } = useDeleteTodos();
 
@@ -52,7 +51,7 @@ export function ShowMore({ id }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="none" className="p-0 pl-2">
+        <Button variant="none" className="p-0 ml-2">
           <BiDotsVertical />
         </Button>
       </DropdownMenuTrigger>
@@ -81,6 +80,7 @@ export function ShowMore({ id }) {
             key={name}
             checked={checked}
             onCheckedChange={onCheckedChange}
+            // onClick={if i click this, the title and description will pass to another card/container and filter the previouse card/container}
           >
             {name}
           </DropdownMenuCheckboxItem>

@@ -2,7 +2,7 @@ import { AddTodoModal } from "@/components/AddTodoModal";
 
 export default function layout({ children }) {
   return (
-    <main
+    <div
       className=" mx-auto p-8 text-center customSm:p-2 
     md:p-6 lg:max-w-7xl"
     >
@@ -11,6 +11,6 @@ export default function layout({ children }) {
       </h1>
       {children}
       <AddTodoModal />
-    </main>
+    </div>
   );
 }
