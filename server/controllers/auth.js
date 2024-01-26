@@ -43,7 +43,7 @@ async function register(req, res) {
         httpOnly: true,
         secure: true,
         maxAge: MAX_AGE,
-        sameSite: "none",
+        sameSite: "Strict",
         path: "/",
       })
       .status(200)
@@ -79,11 +79,11 @@ async function login(req, res) {
         httpOnly: true,
         secure: true,
         maxAge: MAX_AGE,
-        sameSite: "none",
+        sameSite: "Strict",
         path: "/",
       })
       .status(200)
-      .json("Created!");
+      .json(user._id);
   } catch (err) {
     res.status(500).json(err.message);
   }
