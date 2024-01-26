@@ -126,7 +126,9 @@ export default function LoginForm({ setOpen }) {
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
             ))}
           {loginLoading || registerLoading
-            ? "Logging in..."
+            ? register
+              ? "Registering"
+              : "Logging in..."
             : register
             ? "Register"
             : "Login"}
