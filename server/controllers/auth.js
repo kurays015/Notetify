@@ -11,14 +11,17 @@ function generateAccessToken(payload) {
 }
 
 async function register(req, res) {
-  const { email, password } = req.body;
+  const { email, password, confirmPassword } = req.body;
   const user = await User.findOne({ email });
   try {
     if (user) {
       throw new Error("Email is already in use");
     }
-    if (!email || !password) {
-      throw new Error("All field are required");
+    if (!email || !password || !confirmPassword) {
+      throw new Error("All fields are required");
+    }
+    if (password !== confirmPassword) {
+      throw new Error("Password doesn't match!");
     }
     if (!validator.isEmail(email)) {
       throw new Error("Invalid email");
@@ -26,13 +29,25 @@ async function register(req, res) {
     if (!validator.isStrongPassword(password)) {
       throw new Error("Strong password is required");
     }
+    // Hash
+    const salt = bcrypt.genSaltSync(10);
+    const hashedPassword = bcrypt.hashSync(password, salt);
 
-    if (password && validator.isStrongPassword(password)) {
-      const salt = bcrypt.genSaltSync(10);
-      const hashedPassword = bcrypt.hashSync(password, salt);
-      await User.create({ email, password: hashedPassword });
-      res.status(201).json("New user Created");
-    }
+    const newUser = await User.create({ email, password: hashedPassword });
+
+    const payload = { user_id: newUser._id };
+    const accessToken = generateAccessToken(payload);
+
+    res
+      .cookie("accessToken", accessToken, {
+        httpOnly: true,
+        secure: true,
+        maxAge: MAX_AGE,
+        sameSite: "Strict",
+        path: "/",
+      })
+      .status(201)
+      .json(newUser._id);
   } catch (err) {
     res.status(500).json(err.message);
   }
@@ -64,7 +79,7 @@ async function login(req, res) {
         httpOnly: true,
         secure: true,
         maxAge: MAX_AGE,
-        sameSite: "none",
+        sameSite: "Strict",
         path: "/",
       })
       .status(200)

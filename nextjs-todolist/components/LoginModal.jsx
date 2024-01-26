@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -21,6 +20,8 @@ export function LoginModal() {
   useEffect(() => {
     if (!user) {
       router.push("/");
+    } else {
+      router.push("/todos");
     }
   }, []);
 
@@ -32,12 +33,9 @@ export function LoginModal() {
             Login
           </Button>
         </DialogTrigger>
-        <DialogContent className="customSm:max-w-[350px] sm:max-w-[425px]">
+        <DialogContent className="customSm:max-w-[310px] sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle className="text-center">Welcome back!</DialogTitle>
-            <DialogDescription className="text-center">
-              We miss you!
-            </DialogDescription>
           </DialogHeader>
           <LoginForm setOpen={setOpen} />
         </DialogContent>
