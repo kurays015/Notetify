@@ -11,6 +11,7 @@ export default function useLogin() {
     mutationFn: async credentials =>
       await axios.post("/auth/login", credentials),
     onSuccess: res => {
+      console.log(res.data);
       toast({
         description: "Successfully logged in",
       });

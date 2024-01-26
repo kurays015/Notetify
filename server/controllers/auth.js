@@ -83,7 +83,7 @@ async function login(req, res) {
         path: "/",
       })
       .status(200)
-      .json(user._id);
+      .json("Successfully logged in!");
   } catch (err) {
     res.status(500).json(err.message);
   }
