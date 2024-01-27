@@ -102,7 +102,7 @@ export default function LoginForm({ setOpen }) {
             </>
           )}
         </div>
-        <DialogDescription>
+        {/* <DialogDescription>
           {register ? (
             <span>Already have an account? </span>
           ) : (
@@ -113,18 +113,39 @@ export default function LoginForm({ setOpen }) {
             onClick={() => {
               setRegister(prev => !prev);
               formRef.current.reset();
+              loginError.response = {};
+              registerError.response = {};
+            }}
+          >
+            {register ? "Login" : "Register"}
+          </span>
+        </DialogDescription> */}
+      </div>
+      <DialogFooter>
+        <DialogDescription>
+          {register ? (
+            <span className="text-xs customSemiMd:text-sm">
+              Already have an account?{" "}
+            </span>
+          ) : (
+            <span className="text-xs customSemiMd:text-sm">
+              Don&apos;t have an account?{" "}
+            </span>
+          )}
+          <span
+            className="text-blue-500 cursor-pointer customSm:text-xs customSemiMd:text-sm"
+            onClick={() => {
+              setRegister(prev => !prev);
+              formRef.current.reset();
+              loginError.response = {};
+              registerError.response = {};
             }}
           >
             {register ? "Login" : "Register"}
           </span>
         </DialogDescription>
-      </div>
-      <DialogFooter>
         <Button type="submit" disabled={loginLoading || registerLoading}>
-          {loginLoading ||
-            (registerLoading && (
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            ))}
+          {loginLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
           {loginLoading || registerLoading
             ? register
               ? "Registering"

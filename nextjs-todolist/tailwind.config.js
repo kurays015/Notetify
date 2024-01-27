@@ -73,6 +73,7 @@ module.exports = {
       },
       screens: {
         customSm: "320px",
+        customSemiMd: "640px",
       },
     },
   },
