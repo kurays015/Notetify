@@ -5,18 +5,11 @@ import { Textarea } from "./ui/textarea";
 import { DialogFooter } from "./ui/dialog";
 import { Button } from "./ui/button";
 import { Loader2 } from "lucide-react";
-import useAddTodo from "@/app/hooks/useAddTodo";
-import { useRef } from "react";
+import useTodoContext from "@/app/hooks/useTodoContext";
 
 export default function AddTodoForm({ setOpen }) {
-  const titleRef = useRef();
-  const descriptionRef = useRef();
-
-  const {
-    mutateAsync: addTodo,
-    isPending: addTodoLoading,
-    error: addTodoError,
-  } = useAddTodo();
+  const { titleRef, descriptionRef, addTodo, addTodoLoading, addTodoError } =
+    useTodoContext();
 
   async function handleAddTodo(e) {
     e.preventDefault();

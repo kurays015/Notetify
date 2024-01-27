@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import ReactQueryProvider from "./providers/ReactQueryProvider";
 import { ThemeToggle } from "@/components/ui/modetoggle";
 import { Toaster } from "@/components/ui/toaster";
+import TodoContextProvider from "./context/TodoContext";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -17,7 +18,9 @@ export default function RootLayout({ children }) {
         <ThemeProvider attribute="class" defaultTheme="system">
           <ReactQueryProvider>
             <ThemeToggle />
-            <main>{children}</main>
+            <TodoContextProvider>
+              <main>{children}</main>
+            </TodoContextProvider>
             <Toaster />
           </ReactQueryProvider>
         </ThemeProvider>

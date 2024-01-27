@@ -11,9 +11,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import useDeleteTodos from "@/app/hooks/useDeleteTodos";
 import { Loader2 } from "lucide-react";
 import { EditTodoModal } from "./EditTodoModal";
+import useTodoContext from "@/app/hooks/useTodoContext";
 
 export function ShowMore({ id }) {
   const [showStatusBar, setShowStatusBar] = React.useState(true);
@@ -36,13 +36,8 @@ export function ShowMore({ id }) {
       onCheckedChange: setShowPanel,
     },
   ];
-
-  const {
-    mutateAsync: deleteTodo,
-    error: deleteError,
-    isError: deleteIsError,
-    isPending: deleteLoading,
-  } = useDeleteTodos();
+  const { deleteTodo, deleteError, deleteIsError, deleteLoading } =
+    useTodoContext();
 
   async function handleDelete() {
     await deleteTodo({ id });

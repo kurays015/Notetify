@@ -1,17 +1,13 @@
 "use client";
-import useGetTodos from "@/app/hooks/useGetTodos";
 import TodoItem from "./TodoItem";
 import * as React from "react";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import useTodoContext from "@/app/hooks/useTodoContext";
 
 export default function Todos() {
-  const {
-    data: todos,
-    isLoading: todosLoading,
-    isError: todoError,
-  } = useGetTodos();
+  const { todos, todosLoading, todoError } = useTodoContext();
 
   const user = Cookies.get("user");
   const router = useRouter();
