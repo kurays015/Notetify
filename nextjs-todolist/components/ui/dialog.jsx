@@ -63,7 +63,7 @@ DialogHeader.displayName = "DialogHeader";
 const DialogFooter = ({ className, ...props }) => (
   <div
     className={cn(
-      "flex items-center customSm:gap-2 customSemiMd:justify-between",
+      "flex items-center customSm:gap-2 customSm:flex-col customSemiMd:justify-between",
       className
     )}
     {...props}

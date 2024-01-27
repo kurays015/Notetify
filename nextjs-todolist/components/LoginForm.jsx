@@ -124,11 +124,11 @@ export default function LoginForm({ setOpen }) {
       <DialogFooter>
         <DialogDescription>
           {register ? (
-            <span className="text-xs customSemiMd:text-sm">
+            <span className="customSm:text-xs customSemiMd:text-sm">
               Already have an account?{" "}
             </span>
           ) : (
-            <span className="text-xs customSemiMd:text-sm">
+            <span className="customSm:text-xs customSemiMd:text-sm">
               Don&apos;t have an account?{" "}
             </span>
           )}
