@@ -1,4 +1,3 @@
-"use client";
 import useLogin from "@/app/hooks/useLogin";
 import useRegister from "@/app/hooks/useRegister";
 import { Button } from "@/components/ui/button";
@@ -102,24 +101,6 @@ export default function LoginForm({ setOpen }) {
             </>
           )}
         </div>
-        {/* <DialogDescription>
-          {register ? (
-            <span>Already have an account? </span>
-          ) : (
-            <span>Don&apos;t have an account? </span>
-          )}
-          <span
-            className="text-blue-500 cursor-pointer"
-            onClick={() => {
-              setRegister(prev => !prev);
-              formRef.current.reset();
-              loginError.response = {};
-              registerError.response = {};
-            }}
-          >
-            {register ? "Login" : "Register"}
-          </span>
-        </DialogDescription> */}
       </div>
       <DialogFooter>
         <DialogDescription>

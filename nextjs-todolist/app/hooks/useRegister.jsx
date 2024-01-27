@@ -12,7 +12,7 @@ export default function useRegister() {
       await axios.post("/auth/register", credentails),
     onSuccess: res => {
       toast({
-        description: "Successfully Registered!",
+        title: "Successfully Registered!",
       });
       Cookies.set("user", res.data, "7d");
       router.push("/todos");

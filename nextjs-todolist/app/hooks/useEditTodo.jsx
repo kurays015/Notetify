@@ -10,9 +10,15 @@ export default function useEditTodo() {
       await axios.put(`/todos/${id}`, { title, description }),
     onSuccess: () => {
       toast({
-        description: "Successfully updated!",
+        title: "Successfully updated!",
       });
       queryClient.invalidateQueries(["todos"]);
+    },
+    onError: ({ response }) => {
+      toast({
+        variant: "destructive",
+        title: `Something went wrong ${response?.data}`,
+      });
     },
   });
 }

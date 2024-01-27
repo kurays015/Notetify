@@ -1,6 +1,6 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider } from "@/components/ui/theme-provider";
 import ReactQueryProvider from "./providers/ReactQueryProvider";
 import { ThemeToggle } from "@/components/ui/modetoggle";
 import { Toaster } from "@/components/ui/toaster";

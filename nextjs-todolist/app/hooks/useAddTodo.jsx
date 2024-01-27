@@ -9,9 +9,15 @@ export default function useAddTodo() {
     mutationFn: async userTodo => await axios.post("/todos", userTodo),
     onSuccess: () => {
       toast({
-        description: "Successfully added!",
+        title: "Successfully added!",
       });
       queryClient.invalidateQueries(["todos"]);
+    },
+    onError: ({ response }) => {
+      toast({
+        variant: "destructive",
+        title: `Something went wrong ${response?.data}`,
+      });
     },
   });
 }

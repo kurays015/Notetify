@@ -1,4 +1,3 @@
-"use client";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "./ui/textarea";
@@ -20,18 +19,22 @@ export default function EditTodoForm({ setOpen, id }) {
 
   async function handleEditTodo(e) {
     e.preventDefault();
-    if (title === "" || description === "") {
-      return;
+    try {
+      if (title === "" || description === "") {
+        return;
+      }
+      await editTodo(
+        {
+          id,
+          title,
+          description,
+        },
+        id
+      );
+      setOpen(false);
+    } catch (error) {
+      console.log(error);
     }
-    await editTodo(
-      {
-        id,
-        title,
-        description,
-      },
-      id
-    );
-    setOpen(false);
   }
 
   return (

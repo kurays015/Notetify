@@ -1,4 +1,3 @@
-"use client";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -16,26 +15,24 @@ export function EditTodoModal({ id, index }) {
   const [open, setOpen] = useState(false);
   const { setTitle, setDescription, todos } = useTodoContext();
   return (
-    <div className="text-center">
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger asChild>
-          <Button
-            variant="none"
-            onClick={() => {
-              setTitle(todos[index].title);
-              setDescription(todos[index].description);
-            }}
-          >
-            <CiEdit className="cursor-pointer" />
-          </Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
-          <DialogHeader>
-            <DialogTitle className="text-center">Update todo</DialogTitle>
-          </DialogHeader>
-          <EditTodoForm setOpen={setOpen} id={id} />
-        </DialogContent>
-      </Dialog>
-    </div>
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>
+        <Button
+          variant="none"
+          onClick={() => {
+            setTitle(todos[index].title);
+            setDescription(todos[index].description);
+          }}
+        >
+          <CiEdit className="cursor-pointer" />
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle className="text-center">Update todo</DialogTitle>
+        </DialogHeader>
+        <EditTodoForm setOpen={setOpen} id={id} />
+      </DialogContent>
+    </Dialog>
   );
 }

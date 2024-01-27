@@ -30,12 +30,8 @@ export default function TodoContextProvider({ children }) {
     error: editTodoError,
   } = useEditTodo();
 
-  const {
-    mutateAsync: deleteTodo,
-    error: deleteError,
-    isError: deleteIsError,
-    isPending: deleteLoading,
-  } = useDeleteTodos();
+  const { mutateAsync: deleteTodo, isPending: deleteLoading } =
+    useDeleteTodos();
 
   const value = {
     title,
@@ -50,8 +46,6 @@ export default function TodoContextProvider({ children }) {
     addTodoLoading,
     addTodoError,
     deleteTodo,
-    deleteError,
-    deleteIsError,
     deleteLoading,
     todos,
     todosLoading,

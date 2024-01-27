@@ -9,9 +9,16 @@ export default function () {
     mutationFn: async ({ id }) => await axios.delete(`/todos/${id}`),
     onSuccess: () => {
       toast({
-        description: "Successfully deleted!",
+        variant: "destructive",
+        title: "Successfully deleted!",
       });
       queryClient.invalidateQueries(["todos"]);
+    },
+    onError: ({ response }) => {
+      toast({
+        variant: "destructive",
+        title: `Something went wrong ${response?.data}`,
+      });
     },
   });
 }

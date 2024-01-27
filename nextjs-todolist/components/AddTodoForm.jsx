@@ -1,4 +1,3 @@
-"use client";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "./ui/textarea";
@@ -19,13 +18,17 @@ export default function AddTodoForm({ setOpen }) {
   } = useTodoContext();
 
   async function handleAddTodo(e) {
-    e.preventDefault();
-    if (title === "" || description === "") return;
-    await addTodo({
-      title,
-      description,
-    });
-    setOpen(false);
+    try {
+      e.preventDefault();
+      if (title === "" || description === "") return;
+      await addTodo({
+        title,
+        description,
+      });
+      setOpen(false);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -49,7 +52,6 @@ export default function AddTodoForm({ setOpen }) {
           onChange={e => setDescription(e.target.value)}
         />
       </div>
-
       <DialogFooter>
         <Button type="submit" disabled={addTodoLoading}>
           {addTodoLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}

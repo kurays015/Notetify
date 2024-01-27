@@ -1,11 +1,9 @@
-"use client";
 import * as React from "react";
 import { BiDotsVertical } from "react-icons/bi";
 import { MdDeleteOutline } from "react-icons/md";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
-  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -14,6 +12,7 @@ import {
 import { Loader2 } from "lucide-react";
 import { EditTodoModal } from "./EditTodoModal";
 import useTodoContext from "@/app/hooks/useTodoContext";
+import ChangeStatus from "./ChangeStatus";
 
 export function ShowMore({ id, index }) {
   const [showStatusBar, setShowStatusBar] = React.useState(true);
@@ -36,11 +35,14 @@ export function ShowMore({ id, index }) {
       onCheckedChange: setShowPanel,
     },
   ];
-  const { deleteTodo, deleteError, deleteIsError, deleteLoading } =
-    useTodoContext();
+  const { deleteTodo, deleteLoading } = useTodoContext();
 
   async function handleDelete() {
-    await deleteTodo({ id });
+    try {
+      await deleteTodo({ id });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -70,16 +72,7 @@ export function ShowMore({ id, index }) {
             )}
           </span>
         </div>
-        {status.map(({ name, checked, onCheckedChange }) => (
-          <DropdownMenuCheckboxItem
-            key={name}
-            checked={checked}
-            onCheckedChange={onCheckedChange}
-            // onClick={if i click this, the title and description will pass to another card/container and filter the previouse card/container}
-          >
-            {name}
-          </DropdownMenuCheckboxItem>
-        ))}
+        <ChangeStatus status={status} />
       </DropdownMenuContent>
     </DropdownMenu>
   );

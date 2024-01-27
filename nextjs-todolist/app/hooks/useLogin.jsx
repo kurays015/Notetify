@@ -13,10 +13,16 @@ export default function useLogin() {
     onSuccess: res => {
       console.log(res.data);
       toast({
-        description: "Successfully logged in",
+        title: "Successfully logged in",
       });
       Cookies.set("user", res.data, "7d");
       router.push("/todos");
+    },
+    onError: ({ response }) => {
+      toast({
+        variant: "destructive",
+        title: `Something went wrong ${response?.data}`,
+      });
     },
   });
 }
