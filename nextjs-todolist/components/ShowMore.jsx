@@ -15,7 +15,7 @@ import { Loader2 } from "lucide-react";
 import { EditTodoModal } from "./EditTodoModal";
 import useTodoContext from "@/app/hooks/useTodoContext";
 
-export function ShowMore({ id }) {
+export function ShowMore({ id, index }) {
   const [showStatusBar, setShowStatusBar] = React.useState(true);
   const [showActivityBar, setShowActivityBar] = React.useState(false);
   const [showPanel, setShowPanel] = React.useState(false);
@@ -57,7 +57,7 @@ export function ShowMore({ id }) {
         <DropdownMenuSeparator />
         <div className="flex items-center justify-center gap-5">
           <span>
-            <EditTodoModal id={id} />
+            <EditTodoModal id={id} index={index} />
           </span>
           <span>
             {deleteLoading ? (

@@ -28,8 +28,8 @@ export default function Todos() {
           What&apos;s your Todo?
         </CardTitle>
       </CardHeader>
-      {todos?.map(todo => (
-        <TodoItem {...todo} key={todo._id} />
+      {todos?.map((todo, index) => (
+        <TodoItem {...todo} key={todo._id} index={index} />
       ))}
     </Card>
   );

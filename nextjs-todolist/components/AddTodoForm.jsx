@@ -8,16 +8,22 @@ import { Loader2 } from "lucide-react";
 import useTodoContext from "@/app/hooks/useTodoContext";
 
 export default function AddTodoForm({ setOpen }) {
-  const { titleRef, descriptionRef, addTodo, addTodoLoading, addTodoError } =
-    useTodoContext();
+  const {
+    title,
+    setTitle,
+    description,
+    setDescription,
+    addTodo,
+    addTodoLoading,
+    addTodoError,
+  } = useTodoContext();
 
   async function handleAddTodo(e) {
     e.preventDefault();
-    if (titleRef.current.value === "" || !descriptionRef.current.value === "")
-      return;
+    if (title === "" || description === "") return;
     await addTodo({
-      title: titleRef.current.value,
-      description: descriptionRef.current.value,
+      title,
+      description,
     });
     setOpen(false);
   }
@@ -30,15 +36,17 @@ export default function AddTodoForm({ setOpen }) {
           placeholder="Your todo title"
           type="text"
           id="title"
-          ref={titleRef}
           disabled={addTodoLoading}
+          value={title}
+          onChange={e => setTitle(e.target.value)}
         />
         <Label>Description:</Label>
         <Textarea
           placeholder="Describe your todo..."
           id="description"
-          ref={descriptionRef}
           disabled={addTodoLoading}
+          value={description}
+          onChange={e => setDescription(e.target.value)}
         />
       </div>
 

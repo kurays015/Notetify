@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useRef } from "react";
+import { createContext, useRef, useState } from "react";
 import useEditTodo from "../hooks/useEditTodo";
 import useAddTodo from "../hooks/useAddTodo";
 import useDeleteTodos from "../hooks/useDeleteTodos";
@@ -8,8 +8,8 @@ import useGetTodos from "../hooks/useGetTodos";
 export const TodoContext = createContext();
 
 export default function TodoContextProvider({ children }) {
-  const titleRef = useRef(null);
-  const descriptionRef = useRef(null);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const formRef = useRef(null);
 
   const {
@@ -38,8 +38,10 @@ export default function TodoContextProvider({ children }) {
   } = useDeleteTodos();
 
   const value = {
-    titleRef,
-    descriptionRef,
+    title,
+    setTitle,
+    description,
+    setDescription,
     formRef,
     editTodo,
     editTodoLoading,

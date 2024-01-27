@@ -13,11 +13,18 @@ import useTodoContext from "@/app/hooks/useTodoContext";
 
 export function AddTodoModal() {
   const [open, setOpen] = useState(false);
+  const { setTitle, setDescription } = useTodoContext();
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <span>
-          <CiCirclePlus className="customSm:text-7xl fixed bottom-2 right-2 text-blue-400 cursor-pointer" />
+          <CiCirclePlus
+            className="customSm:text-7xl fixed bottom-2 right-2 text-blue-400 cursor-pointer"
+            onClick={() => {
+              setTitle("");
+              setDescription("");
+            }}
+          />
         </span>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">

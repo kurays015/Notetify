@@ -10,15 +10,22 @@ import {
 import EditTodoForm from "./EditTodoForm";
 import { useState } from "react";
 import { CiEdit } from "react-icons/ci";
+import useTodoContext from "@/app/hooks/useTodoContext";
 
-export function EditTodoModal({ id }) {
+export function EditTodoModal({ id, index }) {
   const [open, setOpen] = useState(false);
-
+  const { setTitle, setDescription, todos } = useTodoContext();
   return (
     <div className="text-center">
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button variant="none">
+          <Button
+            variant="none"
+            onClick={() => {
+              setTitle(todos[index].title);
+              setDescription(todos[index].description);
+            }}
+          >
             <CiEdit className="cursor-pointer" />
           </Button>
         </DialogTrigger>

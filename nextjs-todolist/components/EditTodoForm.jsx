@@ -6,29 +6,28 @@ import { DialogFooter } from "./ui/dialog";
 import { Button } from "./ui/button";
 import { Loader2 } from "lucide-react";
 import useTodoContext from "@/app/hooks/useTodoContext";
-import { useState } from "react";
 
 export default function EditTodoForm({ setOpen, id }) {
   const {
-    titleRef,
-    descriptionRef,
+    title,
+    setTitle,
+    description,
+    setDescription,
     editTodo,
     editTodoLoading,
     editTodoError,
-    // todos,
   } = useTodoContext();
 
   async function handleEditTodo(e) {
     e.preventDefault();
-    if (titleRef.current.value === "" || descriptionRef.current.value === "") {
+    if (title === "" || description === "") {
       return;
     }
-
     await editTodo(
       {
         id,
-        title: titleRef.current.value,
-        description: descriptionRef.current.value,
+        title,
+        description,
       },
       id
     );
@@ -43,16 +42,17 @@ export default function EditTodoForm({ setOpen, id }) {
           placeholder="Your new todo title"
           type="text"
           id="title"
-          ref={titleRef}
           disabled={editTodoLoading}
+          value={title}
           onChange={e => setTitle(e.target.value)}
         />
         <Label>Description:</Label>
         <Textarea
           placeholder="Describe your new todo..."
           id="description"
-          ref={descriptionRef}
           disabled={editTodoLoading}
+          value={description}
+          onChange={e => setDescription(e.target.value)}
         />
       </div>
 
