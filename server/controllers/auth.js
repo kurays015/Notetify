@@ -4,7 +4,7 @@ const validator = require("validator");
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 
-const MAX_AGE = 60 * 60 * 24 * 30; // 30DAYS
+const MAX_AGE = 60 * 60 * 24 * 30 * 1000; // 30DAYS
 
 function generateAccessToken(payload) {
   return jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: "7d" });
@@ -42,7 +42,7 @@ async function register(req, res) {
       .cookie("accessToken", accessToken, {
         httpOnly: true,
         secure: true,
-        maxAge: MAX_AGE * 1000,
+        maxAge: MAX_AGE,
         sameSite: "none",
         path: "/",
       })
