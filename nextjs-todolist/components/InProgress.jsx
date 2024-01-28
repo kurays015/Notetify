@@ -7,7 +7,7 @@ import useTodoContext from "@/app/hooks/useTodoContext";
 export default function InProgress() {
   const { todos } = useTodoContext();
   return (
-    <Card className="overflow-y-auto w-[500px]">
+    <Card className="customSm:w-full customSm:max-h-96 overflow-y-auto">
       <CardHeader>
         <CardTitle className="font-semibold text-gray-800 dark:text-white customSm:text-xl lg:text-2xl">
           In Progress

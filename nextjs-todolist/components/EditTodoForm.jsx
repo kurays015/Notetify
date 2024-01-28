@@ -45,6 +45,7 @@ export default function EditTodoForm({ setOpen, id }) {
           disabled={editTodoLoading}
           value={title}
           onChange={e => setTitle(e.target.value)}
+          maxlength="20"
         />
         <Label>Description:</Label>
         <Textarea
@@ -53,6 +54,7 @@ export default function EditTodoForm({ setOpen, id }) {
           disabled={editTodoLoading}
           value={description}
           onChange={e => setDescription(e.target.value)}
+          maxlength="100"
         />
       </div>
 

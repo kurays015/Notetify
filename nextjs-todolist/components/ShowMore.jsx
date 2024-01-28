@@ -49,10 +49,10 @@ export function ShowMore({ id, index }) {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="none" className="p-0 ml-2">
-          <BiDotsVertical />
+          <BiDotsVertical className="text-xl" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-40">
+      <DropdownMenuContent className="w-40 mr-2">
         <DropdownMenuLabel className="text-center">
           Change Status
         </DropdownMenuLabel>
