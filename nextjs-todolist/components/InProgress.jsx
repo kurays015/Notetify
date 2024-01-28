@@ -5,8 +5,7 @@ import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import useTodoContext from "@/app/hooks/useTodoContext";
 
 export default function InProgress() {
-  const { inProgress } = useTodoContext();
-  console.log(inProgress);
+  const { todos } = useTodoContext();
   return (
     <Card className="overflow-y-auto w-[500px]">
       <CardHeader>
@@ -14,8 +13,12 @@ export default function InProgress() {
           In Progress
         </CardTitle>
       </CardHeader>
-      {inProgress?.map((todo, index) => (
-        <TodoItem {...todo} key={todo._id} index={index} />
+      {todos?.map((todo, index) => (
+        <React.Fragment key={todo._id}>
+          {todo.status === "In Progress" && (
+            <TodoItem {...todo} index={index} />
+          )}
+        </React.Fragment>
       ))}
     </Card>
   );

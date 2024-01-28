@@ -10,10 +10,6 @@ const todoSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    isCompleted: {
-      type: Boolean,
-      default: false,
-    },
     userId: {
       type: String,
       required: true,
@@ -21,6 +17,11 @@ const todoSchema = new mongoose.Schema(
     date: {
       type: Date,
       default: Date.now(),
+    },
+    status: {
+      type: String,
+      enum: ["Current Todos", "In Progress", "Completed"],
+      default: "Current Todos",
     },
   },
   { timestamps: true }

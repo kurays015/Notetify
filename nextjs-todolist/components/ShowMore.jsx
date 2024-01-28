@@ -14,7 +14,7 @@ import { EditTodoModal } from "./EditTodoModal";
 import useTodoContext from "@/app/hooks/useTodoContext";
 import ChangeStatus from "./ChangeStatus";
 
-export function ShowMore({ id, index, title, description }) {
+export function ShowMore({ id, index }) {
   const [showStatusBar, setShowStatusBar] = React.useState(true);
   const [showActivityBar, setShowActivityBar] = React.useState(false);
   const [showPanel, setShowPanel] = React.useState(false);
@@ -35,14 +35,11 @@ export function ShowMore({ id, index, title, description }) {
       onCheckedChange: setShowPanel,
     },
   ];
-  const { deleteTodo, deleteLoading, setInProgress, setCompleted } =
-    useTodoContext();
+  const { deleteTodo, deleteLoading } = useTodoContext();
 
   async function handleDelete() {
     try {
       await deleteTodo({ id });
-      setInProgress(prevCopy => prevCopy.filter(todo => todo._id !== id));
-      setCompleted(prevCopy => prevCopy.filter(todo => todo._id !== id));
     } catch (error) {
       console.log(error);
     }
@@ -75,12 +72,7 @@ export function ShowMore({ id, index, title, description }) {
             )}
           </span>
         </div>
-        <ChangeStatus
-          status={status}
-          title={title}
-          description={description}
-          id={id}
-        />
+        <ChangeStatus status={status} id={id} />
       </DropdownMenuContent>
     </DropdownMenu>
   );

@@ -5,7 +5,7 @@ import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import useTodoContext from "@/app/hooks/useTodoContext";
 
 export default function Completed() {
-  const { completed } = useTodoContext();
+  const { todos } = useTodoContext();
   return (
     <Card className="overflow-y-auto w-[500px]">
       <CardHeader>
@@ -13,8 +13,10 @@ export default function Completed() {
           Completed
         </CardTitle>
       </CardHeader>
-      {completed?.map((todo, index) => (
-        <TodoItem {...todo} key={todo._id} index={index} />
+      {todos?.map((todo, index) => (
+        <React.Fragment key={todo._id}>
+          {todo.status === "Completed" && <TodoItem {...todo} index={index} />}
+        </React.Fragment>
       ))}
     </Card>
   );

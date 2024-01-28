@@ -28,12 +28,11 @@ async function postTodos(req, res) {
 
 async function updateTodo(req, res) {
   try {
-    const { title, description, isCompleted } = req.body;
+    const { title, description } = req.body;
     const { id } = req.params;
     const updatedTodo = await Todo.findByIdAndUpdate(id, {
       title,
       description,
-      isCompleted,
     });
     res.status(200).json(updatedTodo);
   } catch (err) {
@@ -51,4 +50,25 @@ async function deleteTodos(req, res) {
   }
 }
 
-module.exports = { getAllTodos, postTodos, updateTodo, deleteTodos };
+async function updateTodoStatus(req, res) {
+  try {
+    const { status } = req.body;
+    const { id } = req.params;
+    const updatedStatus = await Todo.findByIdAndUpdate(
+      id,
+      { status },
+      { new: true }
+    );
+    res.status(201).json(updatedStatus);
+  } catch (error) {
+    res.status(400).json(err.message);
+  }
+}
+
+module.exports = {
+  getAllTodos,
+  postTodos,
+  updateTodo,
+  deleteTodos,
+  updateTodoStatus,
+};

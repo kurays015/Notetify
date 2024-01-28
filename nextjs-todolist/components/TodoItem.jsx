@@ -11,12 +11,7 @@ export default function TodoItem({ title, description, _id, index }) {
         </h5>
         <div className="flex items-center">
           <DatePicker />
-          <ShowMore
-            id={_id}
-            index={index}
-            title={title}
-            description={description}
-          />
+          <ShowMore id={_id} index={index} />
         </div>
       </div>
       <CardDescription className="text-start text-xs">

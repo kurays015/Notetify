@@ -7,6 +7,7 @@ const {
   postTodos,
   updateTodo,
   deleteTodos,
+  updateTodoStatus,
 } = require("../controllers/todo");
 
 router.get("/", getAllTodos);
@@ -14,6 +15,8 @@ router.get("/", getAllTodos);
 router.post("/", postTodos);
 
 router.put("/:id", updateTodo);
+
+router.put("/update-status/:id", updateTodoStatus);
 
 router.delete("/:id", deleteTodos);
 

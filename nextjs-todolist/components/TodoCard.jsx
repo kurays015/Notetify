@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import useTodoContext from "@/app/hooks/useTodoContext";
 
 export default function Todos() {
-  const { todosLoading, todoError, currentTodos } = useTodoContext();
+  const { todosLoading, todoError, todos } = useTodoContext();
 
   const user = Cookies.get("user");
   const router = useRouter();
@@ -25,11 +25,15 @@ export default function Todos() {
     <Card className="overflow-y-auto w-[500px]">
       <CardHeader>
         <CardTitle className="font-semibold text-gray-800 dark:text-white customSm:text-xl lg:text-2xl">
-          What&apos;s your Todo?
+          Current Todo&apos;s
         </CardTitle>
       </CardHeader>
-      {currentTodos?.map((todo, index) => (
-        <TodoItem {...todo} key={todo._id} index={index} />
+      {todos?.map((todo, index) => (
+        <React.Fragment key={todo._id}>
+          {todo.status === "Current Todos" && (
+            <TodoItem {...todo} index={index} />
+          )}
+        </React.Fragment>
       ))}
     </Card>
   );

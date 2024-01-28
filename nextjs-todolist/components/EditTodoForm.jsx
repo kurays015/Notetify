@@ -23,14 +23,11 @@ export default function EditTodoForm({ setOpen, id }) {
       if (title === "" || description === "") {
         return;
       }
-      await editTodo(
-        {
-          id,
-          title,
-          description,
-        },
-        id
-      );
+      await editTodo({
+        id,
+        title,
+        description,
+      });
       setOpen(false);
     } catch (error) {
       console.log(error);

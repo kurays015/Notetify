@@ -6,7 +6,7 @@ import useDeleteTodos from "../hooks/useDeleteTodos";
 import useGetTodos from "../hooks/useGetTodos";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
-import useLocalStorage from "../hooks/useLocalStorage";
+import useUpdateStatus from "../hooks/useUpdateStatus";
 
 export const TodoContext = createContext();
 
@@ -14,8 +14,6 @@ export default function TodoContextProvider({ children }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const formRef = useRef(null);
-  const [inProgress, setInProgress] = useLocalStorage("inProgress", []);
-  const [completed, setCompleted] = useLocalStorage("completed", []);
 
   const router = useRouter();
   const {
@@ -24,12 +22,7 @@ export default function TodoContextProvider({ children }) {
     isError: todoError,
   } = useGetTodos();
 
-  const [currentTodos, setCurrentTodos] = useState([]);
-
   useEffect(() => {
-    if (todos) {
-      setCurrentTodos([...todos]);
-    }
     if (todoError) {
       Cookies.remove("user");
       router.push("/");
@@ -47,6 +40,12 @@ export default function TodoContextProvider({ children }) {
     isPending: editTodoLoading,
     error: editTodoError,
   } = useEditTodo();
+
+  const {
+    mutateAsync: updateStatus,
+    isPending: updateStatusLoading,
+    error: updateStatusError,
+  } = useUpdateStatus();
 
   const { mutateAsync: deleteTodo, isPending: deleteLoading } =
     useDeleteTodos();
@@ -68,12 +67,9 @@ export default function TodoContextProvider({ children }) {
     todos,
     todosLoading,
     todoError,
-    inProgress,
-    setInProgress,
-    currentTodos,
-    setCurrentTodos,
-    completed,
-    setCompleted,
+    updateStatus,
+    updateStatusLoading,
+    updateStatusError,
   };
   return <TodoContext.Provider value={value}>{children}</TodoContext.Provider>;
 }
