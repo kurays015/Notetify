@@ -5,6 +5,7 @@ import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import useTodoContext from "@/app/hooks/useTodoContext";
+import { Skeleton } from "./ui/skeleton";
 
 export default function Todos() {
   const { todosLoading, todoError, todos } = useTodoContext();
@@ -19,7 +20,8 @@ export default function Todos() {
   }, []);
 
   if (todoError) return <div>Login first!</div>;
-  if (todosLoading) return <h1>Loading...</h1>;
+  if (todosLoading) return <Skeleton className="h-[125px] w-full rounded-xl" />;
+
   return (
     <Card className="card customSm:w-full customSm:max-h-[600px] overflow-y-auto">
       <CardHeader>
