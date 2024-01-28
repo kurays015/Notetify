@@ -1,9 +1,11 @@
 "use client";
-import { createContext, useRef, useState } from "react";
+import { createContext, useEffect, useRef, useState } from "react";
 import useEditTodo from "../hooks/useEditTodo";
 import useAddTodo from "../hooks/useAddTodo";
 import useDeleteTodos from "../hooks/useDeleteTodos";
 import useGetTodos from "../hooks/useGetTodos";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 export const TodoContext = createContext();
 
@@ -11,12 +13,27 @@ export default function TodoContextProvider({ children }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const formRef = useRef(null);
+  const [inProgress, setInProgress] = useState([]);
+  const [completed, setCompleted] = useState([]);
 
+  const router = useRouter();
   const {
     data: todos,
     isLoading: todosLoading,
     isError: todoError,
   } = useGetTodos();
+
+  const [currentTodos, setCurrentTodos] = useState([]);
+
+  useEffect(() => {
+    if (todos) {
+      setCurrentTodos([...todos]);
+    }
+    if (todoError) {
+      Cookies.remove("user");
+      router.push("/");
+    }
+  }, [todos, todoError]);
 
   const {
     mutateAsync: addTodo,
@@ -50,6 +67,12 @@ export default function TodoContextProvider({ children }) {
     todos,
     todosLoading,
     todoError,
+    inProgress,
+    setInProgress,
+    currentTodos,
+    setCurrentTodos,
+    completed,
+    setCompleted,
   };
   return <TodoContext.Provider value={value}>{children}</TodoContext.Provider>;
 }

@@ -42,7 +42,7 @@ async function register(req, res) {
       .cookie("accessToken", accessToken, {
         httpOnly: true,
         secure: true,
-        maxAge: MAX_AGE,
+        maxAge: MAX_AGE * 1000,
         sameSite: "none",
         path: "/",
       })
