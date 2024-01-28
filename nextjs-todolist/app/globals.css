@@ -74,6 +74,16 @@
     @apply bg-background text-foreground;
   }
 }
-.DialogOverlay {
-  background-color: red;
+
+.card::-webkit-scrollbar {
+  width: 3px;
+}
+
+.card::-webkit-scrollbar-thumb {
+  background-color: #3b4b6e;
+  border-radius: 6px;
+}
+
+.card::-webkit-scrollbar-track {
+  background: #0f1524;
 }

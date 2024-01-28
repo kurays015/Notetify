@@ -10,9 +10,10 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import useLocalStorage from "@/app/hooks/useLocalStorage";
 
 export function DatePicker() {
-  const [date, setDate] = React.useState();
+  const [date, setDate] = useLocalStorage("date", null);
 
   return (
     <Popover>
@@ -20,7 +21,7 @@ export function DatePicker() {
         <Button
           variant={"outline"}
           className={cn(
-            "text-xs justify-start text-left font-normal",
+            "text-xs p-3 justify-start text-left font-normal",
             !date && "text-muted-foreground"
           )}
         >
