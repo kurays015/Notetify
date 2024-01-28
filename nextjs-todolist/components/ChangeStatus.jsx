@@ -18,8 +18,6 @@ export default function ChangeStatus({ status, id }) {
       {status.map(({ name, checked, onCheckedChange }, index) => (
         <DropdownMenuCheckboxItem
           key={name}
-          // // checked={checked}
-          // onCheckedChange={onCheckedChange}
           onClick={() => updateTodosStatus(name)}
         >
           {name}
