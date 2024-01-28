@@ -24,7 +24,7 @@ export function EditTodoModal({ id, index }) {
             setDescription(todos[index].description);
           }}
         >
-          <CiEdit className="cursor-pointer" />
+          <CiEdit className="cursor-pointer " />
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
