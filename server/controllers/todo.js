@@ -12,16 +12,6 @@ async function getAllTodos(req, res) {
   }
 }
 
-async function eachTodo(req, res) {
-  try {
-    const { id } = req.params;
-    const findTodoById = await Todo.findById(id);
-    res.status(200).json(findTodoById);
-  } catch (err) {
-    res.status(400).json({ error: err.message });
-  }
-}
-
 async function postTodos(req, res) {
   try {
     const { userId } = req.user;
@@ -61,4 +51,4 @@ async function deleteTodos(req, res) {
   }
 }
 
-module.exports = { getAllTodos, eachTodo, postTodos, updateTodo, deleteTodos };
+module.exports = { getAllTodos, postTodos, updateTodo, deleteTodos };

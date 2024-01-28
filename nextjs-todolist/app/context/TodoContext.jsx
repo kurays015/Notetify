@@ -6,6 +6,7 @@ import useDeleteTodos from "../hooks/useDeleteTodos";
 import useGetTodos from "../hooks/useGetTodos";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 export const TodoContext = createContext();
 
@@ -13,8 +14,8 @@ export default function TodoContextProvider({ children }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const formRef = useRef(null);
-  const [inProgress, setInProgress] = useState([]);
-  const [completed, setCompleted] = useState([]);
+  const [inProgress, setInProgress] = useLocalStorage("inProgress", []);
+  const [completed, setCompleted] = useLocalStorage("completed", []);
 
   const router = useRouter();
   const {
