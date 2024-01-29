@@ -19,7 +19,7 @@ export function AddTodoModal() {
       <DialogTrigger asChild>
         <span>
           <CiCirclePlus
-            className="customSm:text-7xl fixed bottom-2 right-2 text-blue-400 cursor-pointer"
+            className="customSm:text-7xl fixed bottom-2 right-2 text-blue-400 cursor-pointer lg:text-[120px] lg:bottom-16 lg:right-14 hover:transition-all hover:-translate-y-6 duration-500 ease-in-out"
             onClick={() => {
               setTitle("");
               setDescription("");
