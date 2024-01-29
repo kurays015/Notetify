@@ -17,7 +17,7 @@ export default function ChangeStatus({ statuses, id, status }) {
 
   return (
     <div>
-      {statuses.map(({ name, checked, onCheckedChange }, index) => (
+      {statuses.map(({ name }) => (
         <React.Fragment key={name}>
           {status !== name && (
             <DropdownMenuCheckboxItem
