@@ -14,11 +14,11 @@ import { EditTodoModal } from "./EditTodoModal";
 import useTodoContext from "@/app/hooks/useTodoContext";
 import ChangeStatus from "./ChangeStatus";
 
-export function ShowMore({ id, index }) {
+export function ShowMore({ id, index, status }) {
   const [showStatusBar, setShowStatusBar] = React.useState(true);
   const [showActivityBar, setShowActivityBar] = React.useState(false);
   const [showPanel, setShowPanel] = React.useState(false);
-  const status = [
+  const statuses = [
     {
       name: "Current Todos",
       checked: showStatusBar,
@@ -72,7 +72,7 @@ export function ShowMore({ id, index }) {
             )}
           </span>
         </div>
-        <ChangeStatus status={status} id={id} />
+        <ChangeStatus statuses={statuses} id={id} status={status} />
       </DropdownMenuContent>
     </DropdownMenu>
   );
