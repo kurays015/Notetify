@@ -19,7 +19,7 @@ export default function Todos() {
     }
   }, []);
 
-  if (todoError) return <div>Login first!</div>;
+  // if (todoError) return "login";
   if (todosLoading) return <Skeleton className="h-[125px] w-full rounded-xl" />;
 
   return (

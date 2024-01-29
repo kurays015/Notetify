@@ -102,8 +102,8 @@ export default function LoginForm({ setOpen }) {
           )}
         </div>
       </div>
-      <DialogFooter>
-        <DialogDescription>
+      <DialogFooter className="customSemiMd:justify-between">
+        <DialogDescription className="customSm:my-2">
           {register ? (
             <span className="customSm:text-xs customSemiMd:text-sm">
               Already have an account?{" "}

@@ -1,5 +1,6 @@
 import useTodoContext from "@/app/hooks/useTodoContext";
 import { DropdownMenuCheckboxItem } from "./ui/dropdown-menu";
+import { TbArrowsExchange } from "react-icons/tb";
 
 export default function ChangeStatus({ status, id }) {
   const { updateStatus, updateStatusLoading, updateStatusError } =
@@ -17,9 +18,11 @@ export default function ChangeStatus({ status, id }) {
     <div>
       {status.map(({ name, checked, onCheckedChange }, index) => (
         <DropdownMenuCheckboxItem
+          className="gap-3"
           key={name}
           onClick={() => updateTodosStatus(name)}
         >
+          <TbArrowsExchange />
           {name}
         </DropdownMenuCheckboxItem>
       ))}

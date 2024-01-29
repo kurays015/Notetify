@@ -11,11 +11,10 @@ export default function useLogin() {
     mutationFn: async credentials =>
       await axios.post("/auth/login", credentials),
     onSuccess: res => {
-      console.log(res.data);
       toast({
         title: "Successfully logged in",
       });
-      Cookies.set("user", res.data, "7d");
+      Cookies.set("user", res.data, { expires: 30 });
       router.push("/todos");
     },
     onError: ({ response }) => {
